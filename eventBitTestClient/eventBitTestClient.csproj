@@ -380,7 +380,9 @@
     <TypeScriptCompile Include="src\app\app.component.spec.ts" />
     <TypeScriptCompile Include="src\app\app.component.ts" />
     <TypeScriptCompile Include="src\app\app.module.ts" />
+    <TypeScriptCompile Include="src\app\Login\LoginSessionData.ts" />
     <TypeScriptCompile Include="src\app\Login\loginDTO.ts" />
+    <TypeScriptCompile Include="src\app\Pull\User.ts" />
     <TypeScriptCompile Include="src\main.ts" />
   </ItemGroup>
   <ItemGroup>

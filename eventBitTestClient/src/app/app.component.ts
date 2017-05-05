@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { Http, Response, Headers } from '@angular/http';
 
 import { loginDTO } from './Login/loginDTO';
+import { LoginSessionData } from './Login/LoginSessionData'
+import { User } from './Pull/User'
 //@Component({
 //  selector: 'my-app',
 //  templateUrl: 'App/Login/Views/Login.html',
@@ -40,14 +42,17 @@ export class LoginComponent {
                 headers: headers
             })
             .subscribe(data => {
-                
+
                 var headers = data.headers;
                 var body = JSON.parse(data.text());
-                debugger;
+                var d = new LoginSessionData(headers, body);
+                localStorage.setItem('Login', JSON.stringify(d));
+                //Success call means logged in
+                this.router.navigateByUrl('/pull');
             }, error => {
-                toastr.warning('My name is Inigo Montoya. You killed my father, prepare to die!');
+                //toastr.warning('My name is Inigo Montoya. You killed my father, prepare to die!');
             });
-       // this.router.navigateByUrl('/pull');
+        // this.router.navigateByUrl('/pull');
     }
 }
 
@@ -57,6 +62,20 @@ export class LoginComponent {
     styleUrls: ['App/Styles/pull.css'],
 })
 export class PullComponent {
-    constructor() { debugger; }
+
+    public loggedUser: User;
+
+    constructor() { this.activate() }   
+
+    activate() {
+
+        var loginInfo = JSON.parse(localStorage.getItem('Login'));
+
+        this.loggedUser.FirstName = loginInfo.Body.FirstName;
+        this.loggedUser.LastName = loginInfo.Body.LastName;
+        this.loggedUser.Email = loginInfo.Body.Email;
+        debugger;
+
+    }
 
 }
