@@ -1,7 +1,7 @@
 ﻿<div class="top-bar">
     <div class="top-bar-left">
         <ul class="dropdown menu" data-dropdown-menu>
-            <li class="menu-text"><img width="50px" src="images/logo.png" /></li>
+            <li class="menu-text">eventBit test harness<!--<img width="50px" src="images/logo.png" />--></li>
             <!--<li>
                 <a href="#">One</a>
                 <ul class="menu vertical">
@@ -16,8 +16,19 @@
     </div>
     <div class="top-bar-right">
         <ul class="menu">
-            <li>{{loggedUser.FirstName}}</li>
+            <li>Welcome, {{loggedUser.FirstName}}!</li>
         </ul>
     </div>
 </div>
-<div class="row rounded" style="background-color:#e6e6e6;height:500px"><div class="large-12 columns"><h1>eventBit test harness</h1></div></div>
+<div class="row rounded" style="background-color:#ffffff;height:500px">
+    <div class="large-12 columns">
+        <h1>eventBit test harness</h1>
+        <div class="row">
+            <div class="large-12 columns">
+                <button (click)="pullSnapShot()" class="button">Get New Snapshot</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

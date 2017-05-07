@@ -43,10 +43,11 @@ export class LoginComponent {
             })
             .subscribe(data => {
 
-                var headers = data.headers;
-                var body = JSON.parse(data.text());
-                var d = new LoginSessionData(headers, body);
-                localStorage.setItem('Login', JSON.stringify(d));
+                var claim = data.headers.get('X-AUTH-CLAIMS');
+
+                localStorage.setItem('X-AUTH-CLAIMS', claim);
+
+                localStorage.setItem('Login', data.text());
                 //Success call means logged in
                 this.router.navigateByUrl('/pull');
             }, error => {
@@ -65,17 +66,48 @@ export class PullComponent {
 
     public loggedUser: User;
 
-    constructor() { this.activate() }   
+    constructor(private http: Http) { this.activate() }
 
     activate() {
 
         var loginInfo = JSON.parse(localStorage.getItem('Login'));
 
-        this.loggedUser.FirstName = loginInfo.Body.FirstName;
-        this.loggedUser.LastName = loginInfo.Body.LastName;
-        this.loggedUser.Email = loginInfo.Body.Email;
-        debugger;
+        this.loggedUser = new User();
 
+        this.loggedUser.FirstName = loginInfo.FirstName;
+        this.loggedUser.LastName = loginInfo.LastName;
+        this.loggedUser.Email = loginInfo.Email;
+
+        var claim = localStorage.getItem('X-AUTH-CLAIMS');
+
+        var headers = new Headers();
+        headers.append('X-AUTH-CLAIMS', claim);
+
+        this.http.get('/api/Pull', {
+            headers: headers
+        }).subscribe(data => {
+            localStorage.setItem('X-AUTH-CLAIMS', data.text());
+        }, error => {
+            
+        });
+        //debugger;
+
+    }
+
+    pullSnapShot() {
+
+        var claim = localStorage.getItem('X-AUTH-CLAIMS');
+
+        var headers = new Headers();
+        headers.append('X-AUTH-CLAIMS', claim);
+
+        this.http.get('/api/Pull', {
+            headers: headers
+        }).subscribe(data => {
+            localStorage.setItem('X-AUTH-CLAIMS', data.text());
+        }, error => {
+
+        });
     }
 
 }
