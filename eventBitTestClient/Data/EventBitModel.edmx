@@ -1,0 +1,238 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="eventBitModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Booth">
+          <Key>
+            <PropertyRef Name="BoothID" />
+            <PropertyRef Name="sysEventID" />
+          </Key>
+          <Property Name="BoothID" Type="int" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="500" />
+          <Property Name="IsMarking" Type="bit" Nullable="false" />
+          <Property Name="IsNonExhibitingSpace" Type="bit" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="500" />
+          <Property Name="RecommendedReadRadius" Type="float" />
+          <Property Name="Size" Type="varchar" MaxLength="500" />
+          <Property Name="sysChangeHashB64" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="sysColumnSigB64" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="sysEventID" Type="int" Nullable="false" />
+          <Property Name="sysInsertDateEpoch" Type="float" />
+          <Property Name="sysInsertedBy" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="sysRowStampNum" Type="float" />
+          <Property Name="sysRowState" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="sysSyncEnterpriseID" Type="int" />
+          <Property Name="sysUpdateDateEpoch" Type="float" />
+          <Property Name="sysUpdatedBy" Type="varchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+            <PropertyRef Name="sysEventID" />
+          </Key>
+          <Property Name="CategoryID" Type="int" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="500" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="ParentCategoryID" Type="int" />
+          <Property Name="sysChangeHashB64" Type="varchar" MaxLength="50" />
+          <Property Name="sysColumnSigB64" Type="varchar" MaxLength="50" />
+          <Property Name="sysEventID" Type="int" Nullable="false" />
+          <Property Name="sysInsertDateEpoch" Type="float" />
+          <Property Name="sysInsertedBy" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="sysRowStampNum" Type="float" />
+          <Property Name="sysRowState" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="sysSyncEnterpriseID" Type="int" />
+          <Property Name="sysUpdateDateEpoch" Type="float" />
+          <Property Name="sysUpdatedBy" Type="varchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EntityState">
+          <Key>
+            <PropertyRef Name="EntityID" />
+            <PropertyRef Name="ShowCode" />
+          </Key>
+          <Property Name="EntityID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ShowCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="sysRowStampNumMax" Type="float" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'eventBit.dbo.SnapshotLog' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="SnapshotLog">
+          <Key>
+            <PropertyRef Name="EntityName" />
+          </Key>
+          <Property Name="EntityName" Type="datetime" Nullable="false" />
+          <Property Name="SnapshotId" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityContainer Name="eventBitModelStoreContainer">
+          <EntitySet Name="Booth" EntityType="Self.Booth" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EntityState" EntityType="Self.EntityState" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SnapshotLog" EntityType="Self.SnapshotLog" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [SnapshotLog].[EntityName] AS [EntityName], 
+    [SnapshotLog].[SnapshotId] AS [SnapshotId]
+    FROM [dbo].[SnapshotLog] AS [SnapshotLog]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="eventBitModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="SnapshotLog">
+          <Key>
+            <PropertyRef Name="EntityName" />
+          </Key>
+          <Property Name="EntityName" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SnapshotId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="eventBitEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="SnapshotLogs" EntityType="Self.SnapshotLog" />
+          <EntitySet Name="EntBooths" EntityType="eventBitModel.EntBooth" />
+          <EntitySet Name="EntityStates" EntityType="eventBitModel.EntityState" />
+          <EntitySet Name="EntCategories" EntityType="eventBitModel.EntCategory" />
+        </EntityContainer>
+        <EntityType Name="EntBooth">
+          <Key>
+            <PropertyRef Name="BoothID" />
+            <PropertyRef Name="sysEventID" />
+          </Key>
+          <Property Name="BoothID" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="IsMarking" Type="Boolean" Nullable="false" />
+          <Property Name="IsNonExhibitingSpace" Type="Boolean" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="RecommendedReadRadius" Type="Double" />
+          <Property Name="Size" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="sysChangeHashB64" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="sysColumnSigB64" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="sysEventID" Type="Int32" Nullable="false" />
+          <Property Name="sysInsertDateEpoch" Type="Double" />
+          <Property Name="sysInsertedBy" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="sysRowStampNum" Type="Double" />
+          <Property Name="sysRowState" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="sysSyncEnterpriseID" Type="Int32" />
+          <Property Name="sysUpdateDateEpoch" Type="Double" />
+          <Property Name="sysUpdatedBy" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="EntityState">
+          <Key>
+            <PropertyRef Name="EntityID" />
+            <PropertyRef Name="ShowCode" />
+          </Key>
+          <Property Name="EntityID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ShowCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="sysRowStampNumMax" Type="Double" />
+        </EntityType>
+        <EntityType Name="EntCategory">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+            <PropertyRef Name="sysEventID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ParentCategoryID" Type="Int32" />
+          <Property Name="sysChangeHashB64" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="sysColumnSigB64" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="sysEventID" Type="Int32" Nullable="false" />
+          <Property Name="sysInsertDateEpoch" Type="Double" />
+          <Property Name="sysInsertedBy" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="sysRowStampNum" Type="Double" />
+          <Property Name="sysRowState" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="sysSyncEnterpriseID" Type="Int32" />
+          <Property Name="sysUpdateDateEpoch" Type="Double" />
+          <Property Name="sysUpdatedBy" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="eventBitModelStoreContainer" CdmEntityContainer="eventBitEntities">
+          <EntitySetMapping Name="SnapshotLogs">
+            <EntityTypeMapping TypeName="eventBitModel.SnapshotLog">
+              <MappingFragment StoreEntitySet="SnapshotLog">
+                <ScalarProperty Name="EntityName" ColumnName="EntityName" />
+                <ScalarProperty Name="SnapshotId" ColumnName="SnapshotId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EntBooths">
+            <EntityTypeMapping TypeName="eventBitModel.EntBooth">
+              <MappingFragment StoreEntitySet="Booth">
+                <ScalarProperty Name="sysUpdatedBy" ColumnName="sysUpdatedBy" />
+                <ScalarProperty Name="sysUpdateDateEpoch" ColumnName="sysUpdateDateEpoch" />
+                <ScalarProperty Name="sysSyncEnterpriseID" ColumnName="sysSyncEnterpriseID" />
+                <ScalarProperty Name="sysRowState" ColumnName="sysRowState" />
+                <ScalarProperty Name="sysRowStampNum" ColumnName="sysRowStampNum" />
+                <ScalarProperty Name="sysInsertedBy" ColumnName="sysInsertedBy" />
+                <ScalarProperty Name="sysInsertDateEpoch" ColumnName="sysInsertDateEpoch" />
+                <ScalarProperty Name="sysEventID" ColumnName="sysEventID" />
+                <ScalarProperty Name="sysColumnSigB64" ColumnName="sysColumnSigB64" />
+                <ScalarProperty Name="sysChangeHashB64" ColumnName="sysChangeHashB64" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="RecommendedReadRadius" ColumnName="RecommendedReadRadius" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IsNonExhibitingSpace" ColumnName="IsNonExhibitingSpace" />
+                <ScalarProperty Name="IsMarking" ColumnName="IsMarking" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="BoothID" ColumnName="BoothID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EntityStates">
+            <EntityTypeMapping TypeName="eventBitModel.EntityState">
+              <MappingFragment StoreEntitySet="EntityState">
+                <ScalarProperty Name="sysRowStampNumMax" ColumnName="sysRowStampNumMax" />
+                <ScalarProperty Name="ShowCode" ColumnName="ShowCode" />
+                <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EntCategories">
+            <EntityTypeMapping TypeName="eventBitModel.EntCategory">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="sysUpdatedBy" ColumnName="sysUpdatedBy" />
+                <ScalarProperty Name="sysUpdateDateEpoch" ColumnName="sysUpdateDateEpoch" />
+                <ScalarProperty Name="sysSyncEnterpriseID" ColumnName="sysSyncEnterpriseID" />
+                <ScalarProperty Name="sysRowState" ColumnName="sysRowState" />
+                <ScalarProperty Name="sysRowStampNum" ColumnName="sysRowStampNum" />
+                <ScalarProperty Name="sysInsertedBy" ColumnName="sysInsertedBy" />
+                <ScalarProperty Name="sysInsertDateEpoch" ColumnName="sysInsertDateEpoch" />
+                <ScalarProperty Name="sysEventID" ColumnName="sysEventID" />
+                <ScalarProperty Name="sysColumnSigB64" ColumnName="sysColumnSigB64" />
+                <ScalarProperty Name="sysChangeHashB64" ColumnName="sysChangeHashB64" />
+                <ScalarProperty Name="ParentCategoryID" ColumnName="ParentCategoryID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

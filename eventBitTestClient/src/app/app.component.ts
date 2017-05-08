@@ -29,11 +29,22 @@ export class AppComponent { }
 })
 export class LoginComponent {
 
-    constructor(private router: Router, private http: Http) { }
+    public model: loginDTO;
+    public remMe: boolean;
 
-    model = new loginDTO('', '');
+    constructor(private router: Router, private http: Http) {
+        this.model = new loginDTO();
+        this.remMe = false;
+    }
+
+    
 
     login() {
+
+        if (this.remMe) {
+            document.cookie = "username=" + this.model.Username + "; expires=" + new Date() + 120;
+        }
+
         var headers = new Headers();
         headers.append('Content-Type', 'application/json');
         this.http
@@ -50,6 +61,9 @@ export class LoginComponent {
                 localStorage.setItem('Login', data.text());
                 //Success call means logged in
                 this.router.navigateByUrl('/pull');
+
+
+
             }, error => {
                 //toastr.warning('My name is Inigo Montoya. You killed my father, prepare to die!');
             });
@@ -64,13 +78,22 @@ export class LoginComponent {
 })
 export class PullComponent {
 
-    public loggedUser: User;
+    public loggedUser: User;    
+
+    public entSync: string;
+
+    public saving: boolean;
 
     constructor(private http: Http) { this.activate() }
+
+    ent = ["Beacon", "Booth", "Category", "Company", "CompanyAltName", "CompanyBooth", "CompanyCategory", "Facility", "FieldDetail", "FieldDetailPick",
+        "Location", "LocationProduct", "LocationSchedule", "Map", "MapBooth", "Person", "PersonCategory", "PersonCompany", "PersonFieldDetailPick", "PersonPurchase",
+        "PersonRegistration", "PersonReservation", "Product", "ProductCategory"];     
 
     activate() {
 
         var loginInfo = JSON.parse(localStorage.getItem('Login'));
+        
 
         this.loggedUser = new User();
 
@@ -92,6 +115,24 @@ export class PullComponent {
         });
         //debugger;
 
+    }
+
+    syncEntities() {
+
+        this.saving = true;
+        var claim = localStorage.getItem('X-AUTH-CLAIMS');
+
+        var headers = new Headers();
+        headers.append('X-AUTH-CLAIMS', claim);
+
+        this.http.get('/api/Sync/' + this.entSync, {
+            headers: headers
+        }).subscribe(data => {
+            localStorage.setItem('X-AUTH-CLAIMS', data.text());
+            this.saving = false;
+        }, error => {
+
+        });
     }
 
     pullSnapShot() {

@@ -37,6 +37,19 @@ namespace eventBitTestClient.Controllers
                 Content = new StringContent(newXAuthHeader, System.Text.Encoding.UTF8, "application/json")
             };
         }
+
+
+        [HttpPost, Route("Test")]
+        public void SyncEntities(SyncDTO ent)
+        {
+
+
+        }
+    }
+
+    public class SyncDTO
+    {
+        public string EntName { get; set; }
     }
 
     public class XAUTH

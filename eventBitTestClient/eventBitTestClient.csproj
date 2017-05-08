@@ -152,6 +152,7 @@
     </Reference>
     <Reference Include="System.Net.Http.WebRequest" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
@@ -248,6 +249,34 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MeController.cs" />
     <Compile Include="Controllers\PullController.cs" />
+    <Compile Include="Controllers\SyncController.cs" />
+    <Compile Include="Data\EntBooth.cs">
+      <DependentUpon>EventBitModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EntCategory.cs">
+      <DependentUpon>EventBitModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EntityState.cs">
+      <DependentUpon>EventBitModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EventBitModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EventBitModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EventBitModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EventBitModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EventBitModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EventBitModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Data\SnapshotLog.cs">
+      <DependentUpon>EventBitModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -266,6 +295,16 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Data\EventBitModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EventBitModel.edmx</DependentUpon>
+      <LastGenOutput>EventBitModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\EventBitModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EventBitModel.edmx</DependentUpon>
+      <LastGenOutput>EventBitModel.cs</LastGenOutput>
+    </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -294,6 +333,13 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="package.json" />
+    <EntityDeploy Include="Data\EventBitModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EventBitModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Data\EventBitModel.edmx.diagram">
+      <DependentUpon>EventBitModel.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -388,6 +434,7 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
