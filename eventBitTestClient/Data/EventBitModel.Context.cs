@@ -26,8 +26,18 @@ namespace eventBitTestClient.Data
         }
     
         public virtual DbSet<SnapshotLog> SnapshotLogs { get; set; }
-        public virtual DbSet<EntBooth> EntBooths { get; set; }
         public virtual DbSet<EntityState> EntityStates { get; set; }
+        public virtual DbSet<EntBooth> EntBooths { get; set; }
         public virtual DbSet<EntCategory> EntCategories { get; set; }
+        public virtual DbSet<EntCompany> EntCompanies { get; set; }
+        public virtual DbSet<EntCompanyAltName> EntCompanyAltNames { get; set; }
+        public virtual DbSet<EntCompanyBooth> EntCompanyBooths { get; set; }
+        public virtual DbSet<EntCompanyCategory> EntCompanyCategories { get; set; }
+        public virtual DbSet<EntFacility> EntFacilities { get; set; }
+        public virtual DbSet<EntFieldDetail> EntFieldDetails { get; set; }
+        public virtual DbSet<EntFieldDetailPick> EntFieldDetailPicks { get; set; }
+        public virtual DbSet<EntLocation> EntLocations { get; set; }
+        public virtual DbSet<EntLocationProduct> EntLocationProducts { get; set; }
+        public virtual DbSet<EntLocationSchedule> EntLocationSchedules { get; set; }
     }
 }

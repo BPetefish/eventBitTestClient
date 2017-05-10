@@ -256,7 +256,37 @@
     <Compile Include="Data\EntCategory.cs">
       <DependentUpon>EventBitModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\EntCompany.cs">
+      <DependentUpon>EventBitModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EntCompanyAltName.cs">
+      <DependentUpon>EventBitModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EntCompanyBooth.cs">
+      <DependentUpon>EventBitModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EntCompanyCategory.cs">
+      <DependentUpon>EventBitModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EntFacility.cs">
+      <DependentUpon>EventBitModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EntFieldDetail.cs">
+      <DependentUpon>EventBitModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EntFieldDetailPick.cs">
+      <DependentUpon>EventBitModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\EntityState.cs">
+      <DependentUpon>EventBitModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EntLocation.cs">
+      <DependentUpon>EventBitModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EntLocationProduct.cs">
+      <DependentUpon>EventBitModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EntLocationSchedule.cs">
       <DependentUpon>EventBitModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\EventBitModel.Context.cs">
@@ -294,6 +324,7 @@
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Data\EventBitModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -305,6 +336,7 @@
       <DependentUpon>EventBitModel.edmx</DependentUpon>
       <LastGenOutput>EventBitModel.cs</LastGenOutput>
     </Content>
+    <Content Include="EntityTemplate.txt" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

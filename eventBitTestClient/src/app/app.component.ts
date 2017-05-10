@@ -37,7 +37,7 @@ export class LoginComponent {
         this.remMe = false;
     }
 
-    
+
 
     login() {
 
@@ -78,7 +78,7 @@ export class LoginComponent {
 })
 export class PullComponent {
 
-    public loggedUser: User;    
+    public loggedUser: User;
 
     public entSync: string;
 
@@ -88,12 +88,12 @@ export class PullComponent {
 
     ent = ["Beacon", "Booth", "Category", "Company", "CompanyAltName", "CompanyBooth", "CompanyCategory", "Facility", "FieldDetail", "FieldDetailPick",
         "Location", "LocationProduct", "LocationSchedule", "Map", "MapBooth", "Person", "PersonCategory", "PersonCompany", "PersonFieldDetailPick", "PersonPurchase",
-        "PersonRegistration", "PersonReservation", "Product", "ProductCategory"];     
+        "PersonRegistration", "PersonReservation", "Product", "ProductCategory"];
 
     activate() {
 
         var loginInfo = JSON.parse(localStorage.getItem('Login'));
-        
+
 
         this.loggedUser = new User();
 
@@ -111,7 +111,7 @@ export class PullComponent {
         }).subscribe(data => {
             localStorage.setItem('X-AUTH-CLAIMS', data.text());
         }, error => {
-            
+
         });
         //debugger;
 
@@ -128,10 +128,16 @@ export class PullComponent {
         this.http.get('/api/Sync/' + this.entSync, {
             headers: headers
         }).subscribe(data => {
-            localStorage.setItem('X-AUTH-CLAIMS', data.text());
+            //debugger;
+            var claim = data.headers.get('X-AUTH-CLAIMS');
+
+            localStorage.setItem('X-AUTH-CLAIMS', claim);
+
+            //localStorage.setItem('X-AUTH-CLAIMS', data.text());
             this.saving = false;
         }, error => {
-
+            this.saving = false;
+            alert('Error');
         });
     }
 

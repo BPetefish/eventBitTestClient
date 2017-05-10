@@ -5,11 +5,21 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="913f6bbc40434987b26d0bbbd75cae7b" Name="Diagram1">
-        <EntityTypeShape EntityType="eventBitModel.SnapshotLog" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="eventBitModel.EntBooth" Width="1.5" PointX="3.375" PointY="0.75" />
-        <EntityTypeShape EntityType="eventBitModel.EntityState" Width="1.5" PointX="0.75" PointY="3.75" />
-        <EntityTypeShape EntityType="eventBitModel.EntCategory" Width="1.5" PointX="5.375" PointY="0.75" />
-      </Diagram>
+        <EntityTypeShape EntityType="eventBitModel.SnapshotLog" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="eventBitModel.EntityState" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="eventBitModel.EntBooth" Width="1.5" PointX="0.75" PointY="2.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="eventBitModel.EntCategory" Width="1.5" PointX="2.75" PointY="2.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="eventBitModel.EntCompany" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="eventBitModel.EntCompanyAltName" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="eventBitModel.EntCompanyBooth" Width="1.5" PointX="4.75" PointY="2.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="eventBitModel.EntCompanyCategory" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="eventBitModel.EntFacility" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="eventBitModel.EntFieldDetail" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="eventBitModel.EntFieldDetailPick" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="eventBitModel.EntLocation" Width="1.5" PointX="3.375" PointY="6.75" />
+        <EntityTypeShape EntityType="eventBitModel.EntLocationProduct" Width="1.5" PointX="5.375" PointY="6.75" />
+        <EntityTypeShape EntityType="eventBitModel.EntLocationSchedule" Width="1.5" PointX="7.375" PointY="2.75" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

@@ -1,0 +1,45 @@
+﻿USE [eventBit]
+GO
+
+/****** Object:  Table [dbo].[EntityTemplateV2]    Script Date: 5/9/2017 7:09:52 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Booth](
+	[BoothID] [int] NOT NULL,
+	/*Custom Fields*/
+	Description  [varchar](max) NULL,
+	IsMarking  bit NULL,
+	IsNonExhibitingSpace  bit NULL,
+	Name  [varchar](max) NULL,
+	RecommendedReadRadius float NULL,
+	Size  [varchar](max) NULL,
+	/* End Custom */
+	[sysChangeHashB64] [varchar](max) NULL,
+	[sysColumnSigB64] [varchar](max) NULL,
+	[sysEventID] [int] NOT NULL,
+	[sysInsertDateEpoch] [float] NULL,
+	[sysInsertedBy] [varchar](max) NOT NULL,
+	[sysRowStampNum] [float] NULL,
+	[sysRowState] [varchar](max) NOT NULL,
+	[sysSyncEnterpriseID] [int] NULL,
+	[sysUpdateDateEpoch] [float] NULL,
+	[sysUpdatedBy] [varchar](max) NOT NULL,
+ CONSTRAINT [PK_Booth] PRIMARY KEY CLUSTERED 
+(
+	[BoothID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+

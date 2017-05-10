@@ -12,15 +12,11 @@ namespace eventBitTestClient.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class EntBooth
+    public partial class EntCompanyCategory
     {
-        public int BoothID { get; set; }
-        public string Description { get; set; }
-        public Nullable<bool> IsMarking { get; set; }
-        public Nullable<bool> IsNonExhibitingSpace { get; set; }
-        public string Name { get; set; }
-        public Nullable<double> RecommendedReadRadius { get; set; }
-        public string Size { get; set; }
+        public int CompanyCategoryID { get; set; }
+        public Nullable<int> CategoryID { get; set; }
+        public Nullable<int> CompanyID { get; set; }
         public string sysChangeHashB64 { get; set; }
         public string sysColumnSigB64 { get; set; }
         public int sysEventID { get; set; }

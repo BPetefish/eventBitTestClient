@@ -8,45 +8,131 @@
         <EntityType Name="Booth">
           <Key>
             <PropertyRef Name="BoothID" />
-            <PropertyRef Name="sysEventID" />
           </Key>
           <Property Name="BoothID" Type="int" Nullable="false" />
-          <Property Name="Description" Type="varchar" MaxLength="500" />
-          <Property Name="IsMarking" Type="bit" Nullable="false" />
-          <Property Name="IsNonExhibitingSpace" Type="bit" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="500" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="IsMarking" Type="bit" />
+          <Property Name="IsNonExhibitingSpace" Type="bit" />
+          <Property Name="Name" Type="varchar(max)" />
           <Property Name="RecommendedReadRadius" Type="float" />
-          <Property Name="Size" Type="varchar" MaxLength="500" />
-          <Property Name="sysChangeHashB64" Type="varchar" MaxLength="1000" Nullable="false" />
-          <Property Name="sysColumnSigB64" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="Size" Type="varchar(max)" />
+          <Property Name="sysChangeHashB64" Type="varchar(max)" />
+          <Property Name="sysColumnSigB64" Type="varchar(max)" />
           <Property Name="sysEventID" Type="int" Nullable="false" />
           <Property Name="sysInsertDateEpoch" Type="float" />
-          <Property Name="sysInsertedBy" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="sysInsertedBy" Type="varchar(max)" Nullable="false" />
           <Property Name="sysRowStampNum" Type="float" />
-          <Property Name="sysRowState" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="sysRowState" Type="varchar(max)" Nullable="false" />
           <Property Name="sysSyncEnterpriseID" Type="int" />
           <Property Name="sysUpdateDateEpoch" Type="float" />
-          <Property Name="sysUpdatedBy" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="sysUpdatedBy" Type="varchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="CategoryID" />
-            <PropertyRef Name="sysEventID" />
           </Key>
           <Property Name="CategoryID" Type="int" Nullable="false" />
-          <Property Name="Description" Type="varchar" MaxLength="500" />
-          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="Name" Type="varchar(max)" />
           <Property Name="ParentCategoryID" Type="int" />
-          <Property Name="sysChangeHashB64" Type="varchar" MaxLength="50" />
-          <Property Name="sysColumnSigB64" Type="varchar" MaxLength="50" />
+          <Property Name="sysChangeHashB64" Type="varchar(max)" />
+          <Property Name="sysColumnSigB64" Type="varchar(max)" />
           <Property Name="sysEventID" Type="int" Nullable="false" />
           <Property Name="sysInsertDateEpoch" Type="float" />
-          <Property Name="sysInsertedBy" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="sysInsertedBy" Type="varchar(max)" Nullable="false" />
           <Property Name="sysRowStampNum" Type="float" />
-          <Property Name="sysRowState" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="sysRowState" Type="varchar(max)" Nullable="false" />
           <Property Name="sysSyncEnterpriseID" Type="int" />
           <Property Name="sysUpdateDateEpoch" Type="float" />
-          <Property Name="sysUpdatedBy" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="sysUpdatedBy" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="CompanyID" />
+          </Key>
+          <Property Name="CompanyID" Type="int" Nullable="false" />
+          <Property Name="Address" Type="varchar(max)" />
+          <Property Name="Address2" Type="varchar(max)" />
+          <Property Name="Address3" Type="varchar(max)" />
+          <Property Name="Bio" Type="varchar(max)" />
+          <Property Name="City" Type="varchar(max)" />
+          <Property Name="Company1" Type="varchar(max)" />
+          <Property Name="Company2" Type="varchar(max)" />
+          <Property Name="Country" Type="varchar(max)" />
+          <Property Name="Email" Type="varchar(max)" />
+          <Property Name="Email2" Type="varchar(max)" />
+          <Property Name="Facebook" Type="varchar(max)" />
+          <Property Name="Fax" Type="varchar(max)" />
+          <Property Name="LinkedIn" Type="varchar(max)" />
+          <Property Name="Mobile" Type="varchar(max)" />
+          <Property Name="Phone" Type="varchar(max)" />
+          <Property Name="Phone2" Type="varchar(max)" />
+          <Property Name="PostalCode" Type="varchar(max)" />
+          <Property Name="State" Type="varchar(max)" />
+          <Property Name="sysChangeHashB64" Type="varchar(max)" />
+          <Property Name="sysColumnSigB64" Type="varchar(max)" />
+          <Property Name="sysEventID" Type="int" Nullable="false" />
+          <Property Name="sysInsertDateEpoch" Type="float" />
+          <Property Name="sysInsertedBy" Type="varchar(max)" Nullable="false" />
+          <Property Name="sysRowStampNum" Type="float" />
+          <Property Name="sysRowState" Type="varchar(max)" Nullable="false" />
+          <Property Name="sysSyncEnterpriseID" Type="int" />
+          <Property Name="sysUpdateDateEpoch" Type="float" />
+          <Property Name="sysUpdatedBy" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CompanyAltName">
+          <Key>
+            <PropertyRef Name="CompanyAltNameID" />
+          </Key>
+          <Property Name="CompanyAltNameID" Type="int" Nullable="false" />
+          <Property Name="CompanyID" Type="int" />
+          <Property Name="Name" Type="varchar(max)" />
+          <Property Name="sysChangeHashB64" Type="varchar(max)" />
+          <Property Name="sysColumnSigB64" Type="varchar(max)" />
+          <Property Name="sysEventID" Type="int" Nullable="false" />
+          <Property Name="sysInsertDateEpoch" Type="float" />
+          <Property Name="sysInsertedBy" Type="varchar(max)" Nullable="false" />
+          <Property Name="sysRowStampNum" Type="float" />
+          <Property Name="sysRowState" Type="varchar(max)" Nullable="false" />
+          <Property Name="sysSyncEnterpriseID" Type="int" />
+          <Property Name="sysUpdateDateEpoch" Type="float" />
+          <Property Name="sysUpdatedBy" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CompanyBooth">
+          <Key>
+            <PropertyRef Name="CompanyBoothID" />
+          </Key>
+          <Property Name="CompanyBoothID" Type="int" Nullable="false" />
+          <Property Name="BoothID" Type="int" />
+          <Property Name="CompanyID" Type="int" />
+          <Property Name="sysChangeHashB64" Type="varchar(max)" />
+          <Property Name="sysColumnSigB64" Type="varchar(max)" />
+          <Property Name="sysEventID" Type="int" Nullable="false" />
+          <Property Name="sysInsertDateEpoch" Type="float" />
+          <Property Name="sysInsertedBy" Type="varchar(max)" Nullable="false" />
+          <Property Name="sysRowStampNum" Type="float" />
+          <Property Name="sysRowState" Type="varchar(max)" Nullable="false" />
+          <Property Name="sysSyncEnterpriseID" Type="int" />
+          <Property Name="sysUpdateDateEpoch" Type="float" />
+          <Property Name="sysUpdatedBy" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CompanyCategory">
+          <Key>
+            <PropertyRef Name="CompanyCategoryID" />
+          </Key>
+          <Property Name="CompanyCategoryID" Type="int" Nullable="false" />
+          <Property Name="CategoryID" Type="int" />
+          <Property Name="CompanyID" Type="int" />
+          <Property Name="sysChangeHashB64" Type="varchar(max)" />
+          <Property Name="sysColumnSigB64" Type="varchar(max)" />
+          <Property Name="sysEventID" Type="int" Nullable="false" />
+          <Property Name="sysInsertDateEpoch" Type="float" />
+          <Property Name="sysInsertedBy" Type="varchar(max)" Nullable="false" />
+          <Property Name="sysRowStampNum" Type="float" />
+          <Property Name="sysRowState" Type="varchar(max)" Nullable="false" />
+          <Property Name="sysSyncEnterpriseID" Type="int" />
+          <Property Name="sysUpdateDateEpoch" Type="float" />
+          <Property Name="sysUpdatedBy" Type="varchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="EntityState">
           <Key>
@@ -56,6 +142,140 @@
           <Property Name="EntityID" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ShowCode" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="sysRowStampNumMax" Type="float" />
+        </EntityType>
+        <EntityType Name="Facility">
+          <Key>
+            <PropertyRef Name="FacilityID" />
+          </Key>
+          <Property Name="FacilityID" Type="int" Nullable="false" />
+          <Property Name="Address" Type="varchar(max)" />
+          <Property Name="Address2" Type="varchar(max)" />
+          <Property Name="Address3" Type="varchar(max)" />
+          <Property Name="City" Type="varchar(max)" />
+          <Property Name="Country" Type="varchar(max)" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="Email" Type="varchar(max)" />
+          <Property Name="Email2" Type="varchar(max)" />
+          <Property Name="Fax" Type="varchar(max)" />
+          <Property Name="Latitude" Type="decimal" Precision="9" Scale="6" />
+          <Property Name="Longitude" Type="decimal" Precision="9" Scale="6" />
+          <Property Name="Mobile" Type="varchar(max)" />
+          <Property Name="Name" Type="varchar(max)" />
+          <Property Name="Phone" Type="varchar(max)" />
+          <Property Name="Phone2" Type="varchar(max)" />
+          <Property Name="PostalCode" Type="varchar(max)" />
+          <Property Name="State" Type="varchar(max)" />
+          <Property Name="sysChangeHashB64" Type="varchar(max)" />
+          <Property Name="sysColumnSigB64" Type="varchar(max)" />
+          <Property Name="sysEventID" Type="int" Nullable="false" />
+          <Property Name="sysInsertDateEpoch" Type="float" />
+          <Property Name="sysInsertedBy" Type="varchar(max)" Nullable="false" />
+          <Property Name="sysRowStampNum" Type="float" />
+          <Property Name="sysRowState" Type="varchar(max)" Nullable="false" />
+          <Property Name="sysSyncEnterpriseID" Type="int" />
+          <Property Name="sysUpdateDateEpoch" Type="float" />
+          <Property Name="sysUpdatedBy" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FieldDetail">
+          <Key>
+            <PropertyRef Name="FieldDetailID" />
+          </Key>
+          <Property Name="FieldDetailID" Type="int" Nullable="false" />
+          <Property Name="Code" Type="varchar(max)" />
+          <Property Name="DisplayOrder" Type="int" />
+          <Property Name="FieldDetailTypeID" Type="bigint" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsExhibitorActive" Type="bit" />
+          <Property Name="Name" Type="varchar(max)" />
+          <Property Name="OverrideName" Type="varchar(max)" />
+          <Property Name="sysChangeHashB64" Type="varchar(max)" />
+          <Property Name="sysColumnSigB64" Type="varchar(max)" />
+          <Property Name="sysEventID" Type="int" Nullable="false" />
+          <Property Name="sysInsertDateEpoch" Type="float" />
+          <Property Name="sysInsertedBy" Type="varchar(max)" Nullable="false" />
+          <Property Name="sysRowStampNum" Type="float" />
+          <Property Name="sysRowState" Type="varchar(max)" Nullable="false" />
+          <Property Name="sysSyncEnterpriseID" Type="int" />
+          <Property Name="sysUpdateDateEpoch" Type="float" />
+          <Property Name="sysUpdatedBy" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FieldDetailPick">
+          <Key>
+            <PropertyRef Name="FieldDetailPickID" />
+          </Key>
+          <Property Name="FieldDetailPickID" Type="int" Nullable="false" />
+          <Property Name="Code" Type="varchar(max)" />
+          <Property Name="DisplayOrder" Type="int" />
+          <Property Name="FieldDetailID" Type="bigint" />
+          <Property Name="FieldDetailOtherID" Type="bigint" />
+          <Property Name="Name" Type="varchar(max)" />
+          <Property Name="sysChangeHashB64" Type="varchar(max)" />
+          <Property Name="sysColumnSigB64" Type="varchar(max)" />
+          <Property Name="sysEventID" Type="int" Nullable="false" />
+          <Property Name="sysInsertDateEpoch" Type="float" />
+          <Property Name="sysInsertedBy" Type="varchar(max)" Nullable="false" />
+          <Property Name="sysRowStampNum" Type="float" />
+          <Property Name="sysRowState" Type="varchar(max)" Nullable="false" />
+          <Property Name="sysSyncEnterpriseID" Type="int" />
+          <Property Name="sysUpdateDateEpoch" Type="float" />
+          <Property Name="sysUpdatedBy" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="LocationID" />
+          </Key>
+          <Property Name="LocationID" Type="bigint" Nullable="false" />
+          <Property Name="BoothID" Type="bigint" />
+          <Property Name="CompanyID" Type="bigint" />
+          <Property Name="Name" Type="varchar(max)" />
+          <Property Name="StayMin" Type="float" />
+          <Property Name="sysChangeHashB64" Type="varchar(max)" />
+          <Property Name="sysColumnSigB64" Type="varchar(max)" />
+          <Property Name="sysEventID" Type="int" Nullable="false" />
+          <Property Name="sysInsertDateEpoch" Type="float" />
+          <Property Name="sysInsertedBy" Type="varchar(max)" Nullable="false" />
+          <Property Name="sysRowStampNum" Type="float" />
+          <Property Name="sysRowState" Type="varchar(max)" Nullable="false" />
+          <Property Name="sysSyncEnterpriseID" Type="int" />
+          <Property Name="sysUpdateDateEpoch" Type="float" />
+          <Property Name="sysUpdatedBy" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LocationProduct">
+          <Key>
+            <PropertyRef Name="LocationProductID" />
+          </Key>
+          <Property Name="LocationProductID" Type="bigint" Nullable="false" />
+          <Property Name="LocationID" Type="bigint" />
+          <Property Name="ProductID" Type="bigint" />
+          <Property Name="sysChangeHashB64" Type="varchar(max)" />
+          <Property Name="sysColumnSigB64" Type="varchar(max)" />
+          <Property Name="sysEventID" Type="int" Nullable="false" />
+          <Property Name="sysInsertDateEpoch" Type="float" />
+          <Property Name="sysInsertedBy" Type="varchar(max)" Nullable="false" />
+          <Property Name="sysRowStampNum" Type="float" />
+          <Property Name="sysRowState" Type="varchar(max)" Nullable="false" />
+          <Property Name="sysSyncEnterpriseID" Type="int" />
+          <Property Name="sysUpdateDateEpoch" Type="float" />
+          <Property Name="sysUpdatedBy" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LocationSchedule">
+          <Key>
+            <PropertyRef Name="LocationScheduleID" />
+          </Key>
+          <Property Name="LocationScheduleID" Type="bigint" Nullable="false" />
+          <Property Name="EndDateEpoch" Type="float" />
+          <Property Name="LocationID" Type="bigint" />
+          <Property Name="StartDateEpoch" Type="float" />
+          <Property Name="sysChangeHashB64" Type="varchar(max)" />
+          <Property Name="sysColumnSigB64" Type="varchar(max)" />
+          <Property Name="sysEventID" Type="int" Nullable="false" />
+          <Property Name="sysInsertDateEpoch" Type="float" />
+          <Property Name="sysInsertedBy" Type="varchar(max)" Nullable="false" />
+          <Property Name="sysRowStampNum" Type="float" />
+          <Property Name="sysRowState" Type="varchar(max)" Nullable="false" />
+          <Property Name="sysSyncEnterpriseID" Type="int" />
+          <Property Name="sysUpdateDateEpoch" Type="float" />
+          <Property Name="sysUpdatedBy" Type="varchar(max)" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'eventBit.dbo.SnapshotLog' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -69,7 +289,17 @@ warning 6002: The table/view 'eventBit.dbo.SnapshotLog' does not have a primary 
         <EntityContainer Name="eventBitModelStoreContainer">
           <EntitySet Name="Booth" EntityType="Self.Booth" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyAltName" EntityType="Self.CompanyAltName" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyBooth" EntityType="Self.CompanyBooth" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyCategory" EntityType="Self.CompanyCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EntityState" EntityType="Self.EntityState" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Facility" EntityType="Self.Facility" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FieldDetail" EntityType="Self.FieldDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FieldDetailPick" EntityType="Self.FieldDetailPick" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LocationProduct" EntityType="Self.LocationProduct" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LocationSchedule" EntityType="Self.LocationSchedule" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SnapshotLog" EntityType="Self.SnapshotLog" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [SnapshotLog].[EntityName] AS [EntityName], 
@@ -90,33 +320,20 @@ warning 6002: The table/view 'eventBit.dbo.SnapshotLog' does not have a primary 
         </EntityType>
         <EntityContainer Name="eventBitEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="SnapshotLogs" EntityType="Self.SnapshotLog" />
-          <EntitySet Name="EntBooths" EntityType="eventBitModel.EntBooth" />
           <EntitySet Name="EntityStates" EntityType="eventBitModel.EntityState" />
+          <EntitySet Name="EntBooths" EntityType="eventBitModel.EntBooth" />
           <EntitySet Name="EntCategories" EntityType="eventBitModel.EntCategory" />
-        </EntityContainer>
-        <EntityType Name="EntBooth">
-          <Key>
-            <PropertyRef Name="BoothID" />
-            <PropertyRef Name="sysEventID" />
-          </Key>
-          <Property Name="BoothID" Type="Int32" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="IsMarking" Type="Boolean" Nullable="false" />
-          <Property Name="IsNonExhibitingSpace" Type="Boolean" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="RecommendedReadRadius" Type="Double" />
-          <Property Name="Size" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="sysChangeHashB64" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="sysColumnSigB64" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="sysEventID" Type="Int32" Nullable="false" />
-          <Property Name="sysInsertDateEpoch" Type="Double" />
-          <Property Name="sysInsertedBy" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="sysRowStampNum" Type="Double" />
-          <Property Name="sysRowState" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="sysSyncEnterpriseID" Type="Int32" />
-          <Property Name="sysUpdateDateEpoch" Type="Double" />
-          <Property Name="sysUpdatedBy" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-        </EntityType>
+          <EntitySet Name="EntCompanies" EntityType="eventBitModel.EntCompany" />
+          <EntitySet Name="EntCompanyAltNames" EntityType="eventBitModel.EntCompanyAltName" />
+          <EntitySet Name="EntCompanyBooths" EntityType="eventBitModel.EntCompanyBooth" />
+          <EntitySet Name="EntCompanyCategories" EntityType="eventBitModel.EntCompanyCategory" />
+          <EntitySet Name="EntFacilities" EntityType="eventBitModel.EntFacility" />
+          <EntitySet Name="EntFieldDetails" EntityType="eventBitModel.EntFieldDetail" />
+          <EntitySet Name="EntFieldDetailPicks" EntityType="eventBitModel.EntFieldDetailPick" />
+          <EntitySet Name="EntLocations" EntityType="eventBitModel.EntLocation" />
+          <EntitySet Name="EntLocationProducts" EntityType="eventBitModel.EntLocationProduct" />
+          <EntitySet Name="EntLocationSchedules" EntityType="eventBitModel.EntLocationSchedule" />
+          </EntityContainer>
         <EntityType Name="EntityState">
           <Key>
             <PropertyRef Name="EntityID" />
@@ -126,27 +343,270 @@ warning 6002: The table/view 'eventBit.dbo.SnapshotLog' does not have a primary 
           <Property Name="ShowCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="sysRowStampNumMax" Type="Double" />
         </EntityType>
+        <EntityType Name="EntBooth">
+          <Key>
+            <PropertyRef Name="BoothID" />
+          </Key>
+          <Property Name="BoothID" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IsMarking" Type="Boolean" />
+          <Property Name="IsNonExhibitingSpace" Type="Boolean" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="RecommendedReadRadius" Type="Double" />
+          <Property Name="Size" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sysChangeHashB64" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sysColumnSigB64" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sysEventID" Type="Int32" Nullable="false" />
+          <Property Name="sysInsertDateEpoch" Type="Double" />
+          <Property Name="sysInsertedBy" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sysRowStampNum" Type="Double" />
+          <Property Name="sysRowState" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sysSyncEnterpriseID" Type="Int32" />
+          <Property Name="sysUpdateDateEpoch" Type="Double" />
+          <Property Name="sysUpdatedBy" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="EntCategory">
           <Key>
             <PropertyRef Name="CategoryID" />
-            <PropertyRef Name="sysEventID" />
           </Key>
           <Property Name="CategoryID" Type="Int32" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="ParentCategoryID" Type="Int32" />
-          <Property Name="sysChangeHashB64" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="sysColumnSigB64" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="sysChangeHashB64" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sysColumnSigB64" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="sysEventID" Type="Int32" Nullable="false" />
           <Property Name="sysInsertDateEpoch" Type="Double" />
-          <Property Name="sysInsertedBy" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="sysInsertedBy" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="sysRowStampNum" Type="Double" />
-          <Property Name="sysRowState" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="sysRowState" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="sysSyncEnterpriseID" Type="Int32" />
           <Property Name="sysUpdateDateEpoch" Type="Double" />
-          <Property Name="sysUpdatedBy" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="sysUpdatedBy" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
-      </Schema>
+        <EntityType Name="EntCompany">
+          <Key>
+            <PropertyRef Name="CompanyID" />
+          </Key>
+          <Property Name="CompanyID" Type="Int32" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Address2" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Address3" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Bio" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Company1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Company2" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Email2" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Facebook" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Fax" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="LinkedIn" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Mobile" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Phone2" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PostalCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sysChangeHashB64" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sysColumnSigB64" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sysEventID" Type="Int32" Nullable="false" />
+          <Property Name="sysInsertDateEpoch" Type="Double" />
+          <Property Name="sysInsertedBy" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sysRowStampNum" Type="Double" />
+          <Property Name="sysRowState" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sysSyncEnterpriseID" Type="Int32" />
+          <Property Name="sysUpdateDateEpoch" Type="Double" />
+          <Property Name="sysUpdatedBy" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="EntCompanyAltName">
+          <Key>
+            <PropertyRef Name="CompanyAltNameID" />
+          </Key>
+          <Property Name="CompanyAltNameID" Type="Int32" Nullable="false" />
+          <Property Name="CompanyID" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sysChangeHashB64" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sysColumnSigB64" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sysEventID" Type="Int32" Nullable="false" />
+          <Property Name="sysInsertDateEpoch" Type="Double" />
+          <Property Name="sysInsertedBy" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sysRowStampNum" Type="Double" />
+          <Property Name="sysRowState" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sysSyncEnterpriseID" Type="Int32" />
+          <Property Name="sysUpdateDateEpoch" Type="Double" />
+          <Property Name="sysUpdatedBy" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="EntCompanyBooth">
+          <Key>
+            <PropertyRef Name="CompanyBoothID" />
+          </Key>
+          <Property Name="CompanyBoothID" Type="Int32" Nullable="false" />
+          <Property Name="BoothID" Type="Int32" />
+          <Property Name="CompanyID" Type="Int32" />
+          <Property Name="sysChangeHashB64" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sysColumnSigB64" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sysEventID" Type="Int32" Nullable="false" />
+          <Property Name="sysInsertDateEpoch" Type="Double" />
+          <Property Name="sysInsertedBy" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sysRowStampNum" Type="Double" />
+          <Property Name="sysRowState" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sysSyncEnterpriseID" Type="Int32" />
+          <Property Name="sysUpdateDateEpoch" Type="Double" />
+          <Property Name="sysUpdatedBy" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="EntCompanyCategory">
+          <Key>
+            <PropertyRef Name="CompanyCategoryID" />
+          </Key>
+          <Property Name="CompanyCategoryID" Type="Int32" Nullable="false" />
+          <Property Name="CategoryID" Type="Int32" />
+          <Property Name="CompanyID" Type="Int32" />
+          <Property Name="sysChangeHashB64" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sysColumnSigB64" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sysEventID" Type="Int32" Nullable="false" />
+          <Property Name="sysInsertDateEpoch" Type="Double" />
+          <Property Name="sysInsertedBy" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sysRowStampNum" Type="Double" />
+          <Property Name="sysRowState" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sysSyncEnterpriseID" Type="Int32" />
+          <Property Name="sysUpdateDateEpoch" Type="Double" />
+          <Property Name="sysUpdatedBy" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="EntFacility">
+          <Key>
+            <PropertyRef Name="FacilityID" />
+          </Key>
+          <Property Name="FacilityID" Type="Int32" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Address2" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Address3" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Email2" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Fax" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Latitude" Type="Decimal" Precision="9" Scale="6" />
+          <Property Name="Longitude" Type="Decimal" Precision="9" Scale="6" />
+          <Property Name="Mobile" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Phone2" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PostalCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sysChangeHashB64" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sysColumnSigB64" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sysEventID" Type="Int32" Nullable="false" />
+          <Property Name="sysInsertDateEpoch" Type="Double" />
+          <Property Name="sysInsertedBy" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sysRowStampNum" Type="Double" />
+          <Property Name="sysRowState" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sysSyncEnterpriseID" Type="Int32" />
+          <Property Name="sysUpdateDateEpoch" Type="Double" />
+          <Property Name="sysUpdatedBy" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="EntFieldDetail">
+          <Key>
+            <PropertyRef Name="FieldDetailID" />
+          </Key>
+          <Property Name="FieldDetailID" Type="Int32" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DisplayOrder" Type="Int32" />
+          <Property Name="FieldDetailTypeID" Type="Int64" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsExhibitorActive" Type="Boolean" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="OverrideName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sysChangeHashB64" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sysColumnSigB64" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sysEventID" Type="Int32" Nullable="false" />
+          <Property Name="sysInsertDateEpoch" Type="Double" />
+          <Property Name="sysInsertedBy" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sysRowStampNum" Type="Double" />
+          <Property Name="sysRowState" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sysSyncEnterpriseID" Type="Int32" />
+          <Property Name="sysUpdateDateEpoch" Type="Double" />
+          <Property Name="sysUpdatedBy" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="EntFieldDetailPick">
+          <Key>
+            <PropertyRef Name="FieldDetailPickID" />
+          </Key>
+          <Property Name="FieldDetailPickID" Type="Int32" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DisplayOrder" Type="Int32" />
+          <Property Name="FieldDetailID" Type="Int64" />
+          <Property Name="FieldDetailOtherID" Type="Int64" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sysChangeHashB64" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sysColumnSigB64" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sysEventID" Type="Int32" Nullable="false" />
+          <Property Name="sysInsertDateEpoch" Type="Double" />
+          <Property Name="sysInsertedBy" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sysRowStampNum" Type="Double" />
+          <Property Name="sysRowState" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sysSyncEnterpriseID" Type="Int32" />
+          <Property Name="sysUpdateDateEpoch" Type="Double" />
+          <Property Name="sysUpdatedBy" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="EntLocation">
+          <Key>
+            <PropertyRef Name="LocationID" />
+          </Key>
+          <Property Name="LocationID" Type="Int64" Nullable="false" />
+          <Property Name="BoothID" Type="Int64" />
+          <Property Name="CompanyID" Type="Int64" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="StayMin" Type="Double" />
+          <Property Name="sysChangeHashB64" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sysColumnSigB64" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sysEventID" Type="Int32" Nullable="false" />
+          <Property Name="sysInsertDateEpoch" Type="Double" />
+          <Property Name="sysInsertedBy" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sysRowStampNum" Type="Double" />
+          <Property Name="sysRowState" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sysSyncEnterpriseID" Type="Int32" />
+          <Property Name="sysUpdateDateEpoch" Type="Double" />
+          <Property Name="sysUpdatedBy" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="EntLocationProduct">
+          <Key>
+            <PropertyRef Name="LocationProductID" />
+          </Key>
+          <Property Name="LocationProductID" Type="Int64" Nullable="false" />
+          <Property Name="LocationID" Type="Int64" />
+          <Property Name="ProductID" Type="Int64" />
+          <Property Name="sysChangeHashB64" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sysColumnSigB64" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sysEventID" Type="Int32" Nullable="false" />
+          <Property Name="sysInsertDateEpoch" Type="Double" />
+          <Property Name="sysInsertedBy" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sysRowStampNum" Type="Double" />
+          <Property Name="sysRowState" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sysSyncEnterpriseID" Type="Int32" />
+          <Property Name="sysUpdateDateEpoch" Type="Double" />
+          <Property Name="sysUpdatedBy" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="EntLocationSchedule">
+          <Key>
+            <PropertyRef Name="LocationScheduleID" />
+          </Key>
+          <Property Name="LocationScheduleID" Type="Int64" Nullable="false" />
+          <Property Name="EndDateEpoch" Type="Double" />
+          <Property Name="LocationID" Type="Int64" />
+          <Property Name="StartDateEpoch" Type="Double" />
+          <Property Name="sysChangeHashB64" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sysColumnSigB64" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sysEventID" Type="Int32" Nullable="false" />
+          <Property Name="sysInsertDateEpoch" Type="Double" />
+          <Property Name="sysInsertedBy" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sysRowStampNum" Type="Double" />
+          <Property Name="sysRowState" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sysSyncEnterpriseID" Type="Int32" />
+          <Property Name="sysUpdateDateEpoch" Type="Double" />
+          <Property Name="sysUpdatedBy" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -157,6 +617,15 @@ warning 6002: The table/view 'eventBit.dbo.SnapshotLog' does not have a primary 
               <MappingFragment StoreEntitySet="SnapshotLog">
                 <ScalarProperty Name="EntityName" ColumnName="EntityName" />
                 <ScalarProperty Name="SnapshotId" ColumnName="SnapshotId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EntityStates">
+            <EntityTypeMapping TypeName="eventBitModel.EntityState">
+              <MappingFragment StoreEntitySet="EntityState">
+                <ScalarProperty Name="sysRowStampNumMax" ColumnName="sysRowStampNumMax" />
+                <ScalarProperty Name="ShowCode" ColumnName="ShowCode" />
+                <ScalarProperty Name="EntityID" ColumnName="EntityID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -183,15 +652,6 @@ warning 6002: The table/view 'eventBit.dbo.SnapshotLog' does not have a primary 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="EntityStates">
-            <EntityTypeMapping TypeName="eventBitModel.EntityState">
-              <MappingFragment StoreEntitySet="EntityState">
-                <ScalarProperty Name="sysRowStampNumMax" ColumnName="sysRowStampNumMax" />
-                <ScalarProperty Name="ShowCode" ColumnName="ShowCode" />
-                <ScalarProperty Name="EntityID" ColumnName="EntityID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="EntCategories">
             <EntityTypeMapping TypeName="eventBitModel.EntCategory">
               <MappingFragment StoreEntitySet="Category">
@@ -212,7 +672,239 @@ warning 6002: The table/view 'eventBit.dbo.SnapshotLog' does not have a primary 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="EntCompanies">
+            <EntityTypeMapping TypeName="eventBitModel.EntCompany">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="sysUpdatedBy" ColumnName="sysUpdatedBy" />
+                <ScalarProperty Name="sysUpdateDateEpoch" ColumnName="sysUpdateDateEpoch" />
+                <ScalarProperty Name="sysSyncEnterpriseID" ColumnName="sysSyncEnterpriseID" />
+                <ScalarProperty Name="sysRowState" ColumnName="sysRowState" />
+                <ScalarProperty Name="sysRowStampNum" ColumnName="sysRowStampNum" />
+                <ScalarProperty Name="sysInsertedBy" ColumnName="sysInsertedBy" />
+                <ScalarProperty Name="sysInsertDateEpoch" ColumnName="sysInsertDateEpoch" />
+                <ScalarProperty Name="sysEventID" ColumnName="sysEventID" />
+                <ScalarProperty Name="sysColumnSigB64" ColumnName="sysColumnSigB64" />
+                <ScalarProperty Name="sysChangeHashB64" ColumnName="sysChangeHashB64" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="Phone2" ColumnName="Phone2" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="LinkedIn" ColumnName="LinkedIn" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="Facebook" ColumnName="Facebook" />
+                <ScalarProperty Name="Email2" ColumnName="Email2" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Company2" ColumnName="Company2" />
+                <ScalarProperty Name="Company1" ColumnName="Company1" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Bio" ColumnName="Bio" />
+                <ScalarProperty Name="Address3" ColumnName="Address3" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EntCompanyAltNames">
+            <EntityTypeMapping TypeName="eventBitModel.EntCompanyAltName">
+              <MappingFragment StoreEntitySet="CompanyAltName">
+                <ScalarProperty Name="sysUpdatedBy" ColumnName="sysUpdatedBy" />
+                <ScalarProperty Name="sysUpdateDateEpoch" ColumnName="sysUpdateDateEpoch" />
+                <ScalarProperty Name="sysSyncEnterpriseID" ColumnName="sysSyncEnterpriseID" />
+                <ScalarProperty Name="sysRowState" ColumnName="sysRowState" />
+                <ScalarProperty Name="sysRowStampNum" ColumnName="sysRowStampNum" />
+                <ScalarProperty Name="sysInsertedBy" ColumnName="sysInsertedBy" />
+                <ScalarProperty Name="sysInsertDateEpoch" ColumnName="sysInsertDateEpoch" />
+                <ScalarProperty Name="sysEventID" ColumnName="sysEventID" />
+                <ScalarProperty Name="sysColumnSigB64" ColumnName="sysColumnSigB64" />
+                <ScalarProperty Name="sysChangeHashB64" ColumnName="sysChangeHashB64" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="CompanyAltNameID" ColumnName="CompanyAltNameID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EntCompanyBooths">
+            <EntityTypeMapping TypeName="eventBitModel.EntCompanyBooth">
+              <MappingFragment StoreEntitySet="CompanyBooth">
+                <ScalarProperty Name="sysUpdatedBy" ColumnName="sysUpdatedBy" />
+                <ScalarProperty Name="sysUpdateDateEpoch" ColumnName="sysUpdateDateEpoch" />
+                <ScalarProperty Name="sysSyncEnterpriseID" ColumnName="sysSyncEnterpriseID" />
+                <ScalarProperty Name="sysRowState" ColumnName="sysRowState" />
+                <ScalarProperty Name="sysRowStampNum" ColumnName="sysRowStampNum" />
+                <ScalarProperty Name="sysInsertedBy" ColumnName="sysInsertedBy" />
+                <ScalarProperty Name="sysInsertDateEpoch" ColumnName="sysInsertDateEpoch" />
+                <ScalarProperty Name="sysEventID" ColumnName="sysEventID" />
+                <ScalarProperty Name="sysColumnSigB64" ColumnName="sysColumnSigB64" />
+                <ScalarProperty Name="sysChangeHashB64" ColumnName="sysChangeHashB64" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="BoothID" ColumnName="BoothID" />
+                <ScalarProperty Name="CompanyBoothID" ColumnName="CompanyBoothID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EntCompanyCategories">
+            <EntityTypeMapping TypeName="eventBitModel.EntCompanyCategory">
+              <MappingFragment StoreEntitySet="CompanyCategory">
+                <ScalarProperty Name="sysUpdatedBy" ColumnName="sysUpdatedBy" />
+                <ScalarProperty Name="sysUpdateDateEpoch" ColumnName="sysUpdateDateEpoch" />
+                <ScalarProperty Name="sysSyncEnterpriseID" ColumnName="sysSyncEnterpriseID" />
+                <ScalarProperty Name="sysRowState" ColumnName="sysRowState" />
+                <ScalarProperty Name="sysRowStampNum" ColumnName="sysRowStampNum" />
+                <ScalarProperty Name="sysInsertedBy" ColumnName="sysInsertedBy" />
+                <ScalarProperty Name="sysInsertDateEpoch" ColumnName="sysInsertDateEpoch" />
+                <ScalarProperty Name="sysEventID" ColumnName="sysEventID" />
+                <ScalarProperty Name="sysColumnSigB64" ColumnName="sysColumnSigB64" />
+                <ScalarProperty Name="sysChangeHashB64" ColumnName="sysChangeHashB64" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="CompanyCategoryID" ColumnName="CompanyCategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EntFacilities">
+            <EntityTypeMapping TypeName="eventBitModel.EntFacility">
+              <MappingFragment StoreEntitySet="Facility">
+                <ScalarProperty Name="sysUpdatedBy" ColumnName="sysUpdatedBy" />
+                <ScalarProperty Name="sysUpdateDateEpoch" ColumnName="sysUpdateDateEpoch" />
+                <ScalarProperty Name="sysSyncEnterpriseID" ColumnName="sysSyncEnterpriseID" />
+                <ScalarProperty Name="sysRowState" ColumnName="sysRowState" />
+                <ScalarProperty Name="sysRowStampNum" ColumnName="sysRowStampNum" />
+                <ScalarProperty Name="sysInsertedBy" ColumnName="sysInsertedBy" />
+                <ScalarProperty Name="sysInsertDateEpoch" ColumnName="sysInsertDateEpoch" />
+                <ScalarProperty Name="sysEventID" ColumnName="sysEventID" />
+                <ScalarProperty Name="sysColumnSigB64" ColumnName="sysColumnSigB64" />
+                <ScalarProperty Name="sysChangeHashB64" ColumnName="sysChangeHashB64" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="Phone2" ColumnName="Phone2" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="Email2" ColumnName="Email2" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address3" ColumnName="Address3" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="FacilityID" ColumnName="FacilityID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EntFieldDetails">
+            <EntityTypeMapping TypeName="eventBitModel.EntFieldDetail">
+              <MappingFragment StoreEntitySet="FieldDetail">
+                <ScalarProperty Name="sysUpdatedBy" ColumnName="sysUpdatedBy" />
+                <ScalarProperty Name="sysUpdateDateEpoch" ColumnName="sysUpdateDateEpoch" />
+                <ScalarProperty Name="sysSyncEnterpriseID" ColumnName="sysSyncEnterpriseID" />
+                <ScalarProperty Name="sysRowState" ColumnName="sysRowState" />
+                <ScalarProperty Name="sysRowStampNum" ColumnName="sysRowStampNum" />
+                <ScalarProperty Name="sysInsertedBy" ColumnName="sysInsertedBy" />
+                <ScalarProperty Name="sysInsertDateEpoch" ColumnName="sysInsertDateEpoch" />
+                <ScalarProperty Name="sysEventID" ColumnName="sysEventID" />
+                <ScalarProperty Name="sysColumnSigB64" ColumnName="sysColumnSigB64" />
+                <ScalarProperty Name="sysChangeHashB64" ColumnName="sysChangeHashB64" />
+                <ScalarProperty Name="OverrideName" ColumnName="OverrideName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IsExhibitorActive" ColumnName="IsExhibitorActive" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="FieldDetailTypeID" ColumnName="FieldDetailTypeID" />
+                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="FieldDetailID" ColumnName="FieldDetailID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EntFieldDetailPicks">
+            <EntityTypeMapping TypeName="eventBitModel.EntFieldDetailPick">
+              <MappingFragment StoreEntitySet="FieldDetailPick">
+                <ScalarProperty Name="sysUpdatedBy" ColumnName="sysUpdatedBy" />
+                <ScalarProperty Name="sysUpdateDateEpoch" ColumnName="sysUpdateDateEpoch" />
+                <ScalarProperty Name="sysSyncEnterpriseID" ColumnName="sysSyncEnterpriseID" />
+                <ScalarProperty Name="sysRowState" ColumnName="sysRowState" />
+                <ScalarProperty Name="sysRowStampNum" ColumnName="sysRowStampNum" />
+                <ScalarProperty Name="sysInsertedBy" ColumnName="sysInsertedBy" />
+                <ScalarProperty Name="sysInsertDateEpoch" ColumnName="sysInsertDateEpoch" />
+                <ScalarProperty Name="sysEventID" ColumnName="sysEventID" />
+                <ScalarProperty Name="sysColumnSigB64" ColumnName="sysColumnSigB64" />
+                <ScalarProperty Name="sysChangeHashB64" ColumnName="sysChangeHashB64" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FieldDetailOtherID" ColumnName="FieldDetailOtherID" />
+                <ScalarProperty Name="FieldDetailID" ColumnName="FieldDetailID" />
+                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="FieldDetailPickID" ColumnName="FieldDetailPickID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EntLocations">
+            <EntityTypeMapping TypeName="eventBitModel.EntLocation">
+              <MappingFragment StoreEntitySet="Location">
+                <ScalarProperty Name="sysUpdatedBy" ColumnName="sysUpdatedBy" />
+                <ScalarProperty Name="sysUpdateDateEpoch" ColumnName="sysUpdateDateEpoch" />
+                <ScalarProperty Name="sysSyncEnterpriseID" ColumnName="sysSyncEnterpriseID" />
+                <ScalarProperty Name="sysRowState" ColumnName="sysRowState" />
+                <ScalarProperty Name="sysRowStampNum" ColumnName="sysRowStampNum" />
+                <ScalarProperty Name="sysInsertedBy" ColumnName="sysInsertedBy" />
+                <ScalarProperty Name="sysInsertDateEpoch" ColumnName="sysInsertDateEpoch" />
+                <ScalarProperty Name="sysEventID" ColumnName="sysEventID" />
+                <ScalarProperty Name="sysColumnSigB64" ColumnName="sysColumnSigB64" />
+                <ScalarProperty Name="sysChangeHashB64" ColumnName="sysChangeHashB64" />
+                <ScalarProperty Name="StayMin" ColumnName="StayMin" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="BoothID" ColumnName="BoothID" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EntLocationProducts">
+            <EntityTypeMapping TypeName="eventBitModel.EntLocationProduct">
+              <MappingFragment StoreEntitySet="LocationProduct">
+                <ScalarProperty Name="sysUpdatedBy" ColumnName="sysUpdatedBy" />
+                <ScalarProperty Name="sysUpdateDateEpoch" ColumnName="sysUpdateDateEpoch" />
+                <ScalarProperty Name="sysSyncEnterpriseID" ColumnName="sysSyncEnterpriseID" />
+                <ScalarProperty Name="sysRowState" ColumnName="sysRowState" />
+                <ScalarProperty Name="sysRowStampNum" ColumnName="sysRowStampNum" />
+                <ScalarProperty Name="sysInsertedBy" ColumnName="sysInsertedBy" />
+                <ScalarProperty Name="sysInsertDateEpoch" ColumnName="sysInsertDateEpoch" />
+                <ScalarProperty Name="sysEventID" ColumnName="sysEventID" />
+                <ScalarProperty Name="sysColumnSigB64" ColumnName="sysColumnSigB64" />
+                <ScalarProperty Name="sysChangeHashB64" ColumnName="sysChangeHashB64" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="LocationProductID" ColumnName="LocationProductID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EntLocationSchedules">
+            <EntityTypeMapping TypeName="eventBitModel.EntLocationSchedule">
+              <MappingFragment StoreEntitySet="LocationSchedule">
+                <ScalarProperty Name="sysUpdatedBy" ColumnName="sysUpdatedBy" />
+                <ScalarProperty Name="sysUpdateDateEpoch" ColumnName="sysUpdateDateEpoch" />
+                <ScalarProperty Name="sysSyncEnterpriseID" ColumnName="sysSyncEnterpriseID" />
+                <ScalarProperty Name="sysRowState" ColumnName="sysRowState" />
+                <ScalarProperty Name="sysRowStampNum" ColumnName="sysRowStampNum" />
+                <ScalarProperty Name="sysInsertedBy" ColumnName="sysInsertedBy" />
+                <ScalarProperty Name="sysInsertDateEpoch" ColumnName="sysInsertDateEpoch" />
+                <ScalarProperty Name="sysEventID" ColumnName="sysEventID" />
+                <ScalarProperty Name="sysColumnSigB64" ColumnName="sysColumnSigB64" />
+                <ScalarProperty Name="sysChangeHashB64" ColumnName="sysChangeHashB64" />
+                <ScalarProperty Name="StartDateEpoch" ColumnName="StartDateEpoch" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="EndDateEpoch" ColumnName="EndDateEpoch" />
+                <ScalarProperty Name="LocationScheduleID" ColumnName="LocationScheduleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

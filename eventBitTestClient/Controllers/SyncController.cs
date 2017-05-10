@@ -15,6 +15,7 @@ namespace eventBitTestClient.Controllers
     public class SyncController : ApiController
     {
         private string X_AUTH_CLAIMS;
+
         // GET: api/Sync
         public IEnumerable<string> Get()
         {
@@ -71,11 +72,10 @@ namespace eventBitTestClient.Controllers
         public async Task<HttpResponseMessage> Get(string id)
         {
             eventBitEntities entities = new eventBitEntities();
+            HttpResponseMessage r = new HttpResponseMessage();
 
-            string eventName = "INF999";
-            double rowStamp = 0;
+            string eventName = "IFT999";
             EntityState entityState;
-
 
             while (true)
             {
@@ -102,66 +102,324 @@ namespace eventBitTestClient.Controllers
 
                 //Sync Data Here
                 //There has to be a way I can get this to be more generic.
-                switch (id)
+                try
                 {
-                    case "Booth":
+                    ProcessDataToEntities(entities, entityState, d, id);
+                } catch (Exception e)
+                {
+
+                }
+            }
+
+
+            r.StatusCode = HttpStatusCode.OK;
+            r.Headers.Add("X-AUTH-CLAIMS", X_AUTH_CLAIMS);
+            return r;
+        }
+
+        private void ProcessDataToEntities(eventBitEntities entities, EntityState entityState, dynamic d, string id)
+        {
+            switch (id)
+            {
+                case "Booth":
+                    {
+                        foreach (JObject data in d)
                         {
-                            foreach (JObject data in d)
-                            {
-                                EntBooth jsonEnt = data.ToObject<EntBooth>();
+                            EntBooth jsonEnt = data.ToObject<EntBooth>();
 
-                                var ent = entities.EntBooths.FirstOrDefault(x => x.BoothID == jsonEnt.BoothID && x.sysEventID == jsonEnt.sysEventID);
+                            var ent = entities.EntBooths.FirstOrDefault(x => x.BoothID == jsonEnt.BoothID && x.sysEventID == jsonEnt.sysEventID);
 
-                                if (ent == null)                            
-                                    entities.EntBooths.Add(jsonEnt);                                
-                                else                                
-                                    CopyPropertyValues(jsonEnt, ent);                      
+                            if (ent == null)
+                                entities.EntBooths.Add(jsonEnt);
+                            else
+                                CopyPropertyValues(jsonEnt, ent);
 
-                            }
+                        }
+                        try
+                        {
+                            entityState.sysRowStampNumMax = entities.EntBooths.Local.Max(m => m.sysRowStampNum);
+                        }
+                        catch (Exception e)
+                        {
                             entityState.sysRowStampNumMax = entities.EntBooths.Max(m => m.sysRowStampNum);
                         }
-                        break;
-                    case "Category":
+                    }
+                    break;
+                case "Category":
+                    {
+                        foreach (JObject data in d)
                         {
-                            foreach (JObject data in d)
-                            {
-                                var jsonEnt = data.ToObject<EntCategory>();
+                            EntCategory jsonEnt = data.ToObject<EntCategory>();
 
-                                var ent = entities.EntCategories.FirstOrDefault(x => x.CategoryID == jsonEnt.CategoryID && x.sysEventID == jsonEnt.sysEventID);
+                            var ent = entities.EntCategories.FirstOrDefault(x => x.CategoryID == jsonEnt.CategoryID && x.sysEventID == jsonEnt.sysEventID);
 
-                                if (ent == null)
-                                    entities.EntCategories.Add(jsonEnt);
-                                else
-                                    CopyPropertyValues(jsonEnt, ent);
+                            if (ent == null)
+                                entities.EntCategories.Add(jsonEnt);
+                            else
+                                CopyPropertyValues(jsonEnt, ent);
 
-                            }
+                        }
+                        try
+                        {
+                            entityState.sysRowStampNumMax = entities.EntCategories.Local.Max(m => m.sysRowStampNum);
+                        }
+                        catch (Exception e)
+                        {
                             entityState.sysRowStampNumMax = entities.EntCategories.Max(m => m.sysRowStampNum);
                         }
-                        break;
-                }
-                //Save all added parts
+                    }
+                    break;
+                case "Company":
+                    {
+                        foreach (JObject data in d)
+                        {
+                            EntCompany jsonEnt = data.ToObject<EntCompany>();
+
+                            var ent = entities.EntCompanies.FirstOrDefault(x => x.CompanyID == jsonEnt.CompanyID && x.sysEventID == jsonEnt.sysEventID);
+
+                            if (ent == null)
+                                entities.EntCompanies.Add(jsonEnt);
+                            else
+                                CopyPropertyValues(jsonEnt, ent);
+
+                        }
+                        try
+                        {
+                            entityState.sysRowStampNumMax = entities.EntCompanies.Local.Max(m => m.sysRowStampNum);
+                        }
+                        catch (Exception e)
+                        {
+                            entityState.sysRowStampNumMax = entities.EntCompanies.Max(m => m.sysRowStampNum);
+                        }
+                    }
+                    break;
+                case "CompanyAltName":
+                    {
+                        foreach (JObject data in d)
+                        {
+                            EntCompanyAltName jsonEnt = data.ToObject<EntCompanyAltName>();
+
+                            var ent = entities.EntCompanyAltNames.FirstOrDefault(x => x.CompanyAltNameID == jsonEnt.CompanyAltNameID && x.sysEventID == jsonEnt.sysEventID);
+
+                            if (ent == null)
+                                entities.EntCompanyAltNames.Add(jsonEnt);
+                            else
+                                CopyPropertyValues(jsonEnt, ent);
+
+                        }
+                        try
+                        {
+                            entityState.sysRowStampNumMax = entities.EntCompanyAltNames.Local.Max(m => m.sysRowStampNum);
+                        }
+                        catch (Exception e)
+                        {
+                            entityState.sysRowStampNumMax = entities.EntCompanyAltNames.Max(m => m.sysRowStampNum);
+                        }
+                    }
+                    break;
+                case "CompanyBooth":
+                    {
+                        foreach (JObject data in d)
+                        {
+                            EntCompanyBooth jsonEnt = data.ToObject<EntCompanyBooth>();
+
+                            var ent = entities.EntCompanyBooths.FirstOrDefault(x => x.CompanyBoothID == jsonEnt.CompanyBoothID && x.sysEventID == jsonEnt.sysEventID);
+
+                            if (ent == null)
+                                entities.EntCompanyBooths.Add(jsonEnt);
+                            else
+                                CopyPropertyValues(jsonEnt, ent);
+
+                        }
+                        try
+                        {
+                            entityState.sysRowStampNumMax = entities.EntCompanyBooths.Local.Max(m => m.sysRowStampNum);
+                        }
+                        catch (Exception e)
+                        {
+                            entityState.sysRowStampNumMax = entities.EntCompanyBooths.Max(m => m.sysRowStampNum);
+                        }
+                    }
+                    break;
+                case "CompanyCategory":
+                    {
+                        foreach (JObject data in d)
+                        {
+                            EntCompanyCategory jsonEnt = data.ToObject<EntCompanyCategory>();
+
+                            var ent = entities.EntCompanyCategories.FirstOrDefault(x => x.CompanyCategoryID == jsonEnt.CompanyCategoryID && x.sysEventID == jsonEnt.sysEventID);
+
+                            if (ent == null)
+                                entities.EntCompanyCategories.Add(jsonEnt);
+                            else
+                                CopyPropertyValues(jsonEnt, ent);
+
+                        }
+                        try
+                        {
+                            entityState.sysRowStampNumMax = entities.EntCompanyCategories.Local.Max(m => m.sysRowStampNum);
+                        }
+                        catch (Exception e)
+                        {
+                            entityState.sysRowStampNumMax = entities.EntCompanyCategories.Max(m => m.sysRowStampNum);
+                        }
+                    }
+                    break;
+                    case "Facility":
+                    {
+                        foreach (JObject data in d)
+                        {
+                            EntFacility jsonEnt = data.ToObject<EntFacility>();
+
+                            var ent = entities.EntFacilities.FirstOrDefault(x => x.FacilityID == jsonEnt.FacilityID && x.sysEventID == jsonEnt.sysEventID);
+
+                            if (ent == null)
+                                entities.EntFacilities.Add(jsonEnt);
+                            else
+                                CopyPropertyValues(jsonEnt, ent);
+
+                        }
+                        try
+                        {
+                            entityState.sysRowStampNumMax = entities.EntFacilities.Local.Max(m => m.sysRowStampNum);
+                        }
+                        catch (Exception e)
+                        {
+                            entityState.sysRowStampNumMax = entities.EntFacilities.Max(m => m.sysRowStampNum);
+                        }
+                    }
+                    break;
+                case "FieldDetail":
+                    {
+                        foreach (JObject data in d)
+                        {
+                            EntFieldDetail jsonEnt = data.ToObject<EntFieldDetail>();
+
+                            var ent = entities.EntFieldDetails.FirstOrDefault(x => x.FieldDetailID == jsonEnt.FieldDetailID && x.sysEventID == jsonEnt.sysEventID);
+
+                            if (ent == null)
+                                entities.EntFieldDetails.Add(jsonEnt);
+                            else
+                                CopyPropertyValues(jsonEnt, ent);
+
+                        }
+                        try
+                        {
+                            entityState.sysRowStampNumMax = entities.EntFieldDetails.Local.Max(m => m.sysRowStampNum);
+                        }
+                        catch (Exception e)
+                        {
+                            entityState.sysRowStampNumMax = entities.EntFieldDetails.Max(m => m.sysRowStampNum);
+                        }
+                    }
+                    break;
+                case "FieldDetailPick":
+                    {
+                        foreach (JObject data in d)
+                        {
+                            EntFieldDetailPick jsonEnt = data.ToObject<EntFieldDetailPick>();
+
+                            var ent = entities.EntFieldDetailPicks.FirstOrDefault(x => x.FieldDetailPickID == jsonEnt.FieldDetailPickID && x.sysEventID == jsonEnt.sysEventID);
+
+                            if (ent == null)
+                                entities.EntFieldDetailPicks.Add(jsonEnt);
+                            else
+                                CopyPropertyValues(jsonEnt, ent);
+
+                        }
+                        try
+                        {
+                            entityState.sysRowStampNumMax = entities.EntFieldDetailPicks.Local.Max(m => m.sysRowStampNum);
+                        }
+                        catch (Exception e)
+                        {
+                            entityState.sysRowStampNumMax = entities.EntFieldDetailPicks.Max(m => m.sysRowStampNum);
+                        }
+                    }
+                    break;
+                case "Location":
+                    {
+                        foreach (JObject data in d)
+                        {
+                            EntLocation jsonEnt = data.ToObject<EntLocation>();
+
+                            var ent = entities.EntLocations.FirstOrDefault(x => x.LocationID == jsonEnt.LocationID && x.sysEventID == jsonEnt.sysEventID);
+
+                            if (ent == null)
+                                entities.EntLocations.Add(jsonEnt);
+                            else
+                                CopyPropertyValues(jsonEnt, ent);
+
+                        }
+                        try
+                        {
+                            entityState.sysRowStampNumMax = entities.EntLocations.Local.Max(m => m.sysRowStampNum);
+                        }
+                        catch (Exception e)
+                        {
+                            entityState.sysRowStampNumMax = entities.EntLocations.Max(m => m.sysRowStampNum);
+                        }
+                    }
+                    break;
+                case "LocationProduct":
+                    {
+                        foreach (JObject data in d)
+                        {
+                            EntLocationProduct jsonEnt = data.ToObject<EntLocationProduct>();
+
+                            var ent = entities.EntLocationProducts.FirstOrDefault(x => x.LocationProductID == jsonEnt.LocationProductID && x.sysEventID == jsonEnt.sysEventID);
+
+                            if (ent == null)
+                                entities.EntLocationProducts.Add(jsonEnt);
+                            else
+                                CopyPropertyValues(jsonEnt, ent);
+
+                        }
+                        try
+                        {
+                            entityState.sysRowStampNumMax = entities.EntLocationProducts.Local.Max(m => m.sysRowStampNum);
+                        }
+                        catch (Exception e)
+                        {
+                            entityState.sysRowStampNumMax = entities.EntLocationProducts.Max(m => m.sysRowStampNum);
+                        }
+                    }
+                    break;
+                case "LocationSchedule":
+                    {
+                        foreach (JObject data in d)
+                        {
+                            EntLocationSchedule jsonEnt = data.ToObject<EntLocationSchedule>();
+
+                            var ent = entities.EntLocationSchedules.FirstOrDefault(x => x.LocationScheduleID == jsonEnt.LocationScheduleID && x.sysEventID == jsonEnt.sysEventID);
+
+                            if (ent == null)
+                                entities.EntLocationSchedules.Add(jsonEnt);
+                            else
+                                CopyPropertyValues(jsonEnt, ent);
+
+                        }
+                        try
+                        {
+                            entityState.sysRowStampNumMax = entities.EntLocationSchedules.Local.Max(m => m.sysRowStampNum);
+                        }
+                        catch (Exception e)
+                        {
+                            entityState.sysRowStampNumMax = entities.EntLocationSchedules.Max(m => m.sysRowStampNum);
+                        }
+                    }
+                    break;
+
+            }
+            //Save all added parts
+            try
+            {
                 entities.SaveChanges();
             }
-            
-            return new HttpResponseMessage()
+            catch (Exception e)
             {
-                Content = new StringContent(X_AUTH_CLAIMS, System.Text.Encoding.UTF8, "application/json")
-            };
-        }
 
-        // POST: api/Sync
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT: api/Sync/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE: api/Sync/5
-        public void Delete(int id)
-        {
+            }
         }
     }
 }

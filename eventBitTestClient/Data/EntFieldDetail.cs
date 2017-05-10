@@ -12,15 +12,16 @@ namespace eventBitTestClient.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class EntBooth
+    public partial class EntFieldDetail
     {
-        public int BoothID { get; set; }
-        public string Description { get; set; }
-        public Nullable<bool> IsMarking { get; set; }
-        public Nullable<bool> IsNonExhibitingSpace { get; set; }
+        public int FieldDetailID { get; set; }
+        public string Code { get; set; }
+        public Nullable<int> DisplayOrder { get; set; }
+        public Nullable<long> FieldDetailTypeID { get; set; }
+        public Nullable<bool> IsActive { get; set; }
+        public Nullable<bool> IsExhibitorActive { get; set; }
         public string Name { get; set; }
-        public Nullable<double> RecommendedReadRadius { get; set; }
-        public string Size { get; set; }
+        public string OverrideName { get; set; }
         public string sysChangeHashB64 { get; set; }
         public string sysColumnSigB64 { get; set; }
         public int sysEventID { get; set; }
