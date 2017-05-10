@@ -104,6 +104,8 @@ namespace eventBitTestClient.Controllers
                 //There has to be a way I can get this to be more generic.
                 try
                 {
+                    //There has to be a way to make this SUPER generic. 
+                    //Currently a messy switch.
                     ProcessDataToEntities(entities, entityState, d, id);
                 } catch (Exception e)
                 {
@@ -117,6 +119,8 @@ namespace eventBitTestClient.Controllers
             return r;
         }
 
+        //I May want to send responses back so I can give the user a snapshot of whats going on.
+        //Of course I can always just fake the loading bar.
         private void ProcessDataToEntities(eventBitEntities entities, EntityState entityState, dynamic d, string id)
         {
             switch (id)
