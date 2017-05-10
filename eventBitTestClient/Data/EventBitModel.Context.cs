@@ -39,5 +39,8 @@ namespace eventBitTestClient.Data
         public virtual DbSet<EntLocation> EntLocations { get; set; }
         public virtual DbSet<EntLocationProduct> EntLocationProducts { get; set; }
         public virtual DbSet<EntLocationSchedule> EntLocationSchedules { get; set; }
+        public virtual DbSet<EntMap> EntMaps { get; set; }
+        public virtual DbSet<EntMapBooth> EntMapBooths { get; set; }
+        public virtual DbSet<EntPerson> EntPersons { get; set; }
     }
 }
