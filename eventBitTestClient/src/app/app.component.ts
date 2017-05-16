@@ -164,7 +164,7 @@ export class PullComponent {
         var headers = new Headers();
         headers.append('X-AUTH-CLAIMS', claim);
 
-        this.http.get('/api/Pull', {
+        this.http.get('/api/Snapshot', {
             headers: headers
         }).subscribe(data => {
             localStorage.setItem('X-AUTH-CLAIMS', data.text());

@@ -134,6 +134,7 @@ namespace eventBitTestClient.Controllers
                     //There has to be a way to make this SUPER generic. 
                     //Currently a messy switch. At least it makes it easy to debug.
                     ProcessDataToEntities(entities, entityState, d, id);
+                    //ProcessDataToEntitiesGeneric<EntBooth>(entities, entityState, d, id);
                 }
                 catch (Exception e)
                 {
@@ -148,9 +149,12 @@ namespace eventBitTestClient.Controllers
         }
 
 
-        private void ProcessDataToEntitiesGeneric<TEntity>(eventBitEntities entities, EntityState entityState, dynamic d, string id, TEntity t)
+        private void ProcessDataToEntitiesGeneric<T>(eventBitEntities entities, EntityState entityState, dynamic d, string id) where T : class
         {
             // var ent = entities.Set<t.GetType()>();
+            //var table = entities.Set<T>();
+
+        //    var ent = table.FirstOrDefault(x => x.BoothId = 100)
         }
 
         //I May want to send responses back so I can give the user a snapshot of whats going on.

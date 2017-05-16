@@ -249,6 +249,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MeController.cs" />
     <Compile Include="Controllers\PullController.cs" />
+    <Compile Include="Controllers\SnapshotController.cs" />
     <Compile Include="Controllers\SyncController.cs" />
     <Compile Include="Data\EntBooth.cs">
       <DependentUpon>EventBitModel.tt</DependentUpon>
