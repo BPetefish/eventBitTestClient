@@ -42,5 +42,16 @@ namespace eventBitTestClient.Data
         public virtual DbSet<EntMap> EntMaps { get; set; }
         public virtual DbSet<EntMapBooth> EntMapBooths { get; set; }
         public virtual DbSet<EntPerson> EntPersons { get; set; }
+        public virtual DbSet<EntPersonCategory> EntPersonCategories { get; set; }
+        public virtual DbSet<EntPersonCompany> EntPersonCompanies { get; set; }
+        public virtual DbSet<EntPersonFieldDetailPick> EntPersonFieldDetailPicks { get; set; }
+        public virtual DbSet<EntPersonPurchase> EntPersonPurchases { get; set; }
+        public virtual DbSet<EntPersonRegistration> EntPersonRegistrations { get; set; }
+        public virtual DbSet<EntPersonReservation> EntPersonReservations { get; set; }
+        public virtual DbSet<EntProduct> EntProducts { get; set; }
+        public virtual DbSet<EntProductCategory> EntProductCategories { get; set; }
+        public virtual DbSet<EntBoothCategory> EntBoothCategories { get; set; }
+        public virtual DbSet<EntFieldDetailCategory> EntFieldDetailCategories { get; set; }
+        public virtual DbSet<EntFieldDetailPickCategory> EntFieldDetailPickCategories { get; set; }
     }
 }

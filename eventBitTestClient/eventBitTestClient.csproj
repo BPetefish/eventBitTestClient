@@ -253,6 +253,9 @@
     <Compile Include="Data\EntBooth.cs">
       <DependentUpon>EventBitModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\EntBoothCategory.cs">
+      <DependentUpon>EventBitModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\EntCategory.cs">
       <DependentUpon>EventBitModel.tt</DependentUpon>
     </Compile>
@@ -274,7 +277,13 @@
     <Compile Include="Data\EntFieldDetail.cs">
       <DependentUpon>EventBitModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\EntFieldDetailCategory.cs">
+      <DependentUpon>EventBitModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\EntFieldDetailPick.cs">
+      <DependentUpon>EventBitModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EntFieldDetailPickCategory.cs">
       <DependentUpon>EventBitModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\EntityState.cs">
@@ -296,6 +305,30 @@
       <DependentUpon>EventBitModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\EntPerson.cs">
+      <DependentUpon>EventBitModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EntPersonCategory.cs">
+      <DependentUpon>EventBitModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EntPersonCompany.cs">
+      <DependentUpon>EventBitModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EntPersonFieldDetailPick.cs">
+      <DependentUpon>EventBitModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EntPersonPurchase.cs">
+      <DependentUpon>EventBitModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EntPersonRegistration.cs">
+      <DependentUpon>EventBitModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EntPersonReservation.cs">
+      <DependentUpon>EventBitModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EntProduct.cs">
+      <DependentUpon>EventBitModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EntProductCategory.cs">
       <DependentUpon>EventBitModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\EventBitModel.Context.cs">

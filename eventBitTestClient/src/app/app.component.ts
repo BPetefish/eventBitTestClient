@@ -31,10 +31,12 @@ export class LoginComponent {
 
     public model: loginDTO;
     public remMe: boolean;
+    public logging: boolean;
 
     constructor(private router: Router, private http: Http) {
         this.model = new loginDTO();
         this.remMe = false;
+        this.logging = false;
     }
 
 
@@ -45,6 +47,8 @@ export class LoginComponent {
             document.cookie = "username=" + this.model.Username + "; expires=" + new Date() + 120;
         }
 
+
+        this.logging = true;
         var headers = new Headers();
         headers.append('Content-Type', 'application/json');
         this.http
@@ -61,11 +65,12 @@ export class LoginComponent {
                 localStorage.setItem('Login', data.text());
                 //Success call means logged in
                 this.router.navigateByUrl('/pull');
-
+                this.logging = false;
 
 
             }, error => {
                 //toastr.warning('My name is Inigo Montoya. You killed my father, prepare to die!');
+                this.logging = false;
             });
         // this.router.navigateByUrl('/pull');
     }
@@ -84,13 +89,14 @@ export class PullComponent {
 
     public saving: boolean;
 
+    public ent: string[];
+
     constructor(private http: Http) { this.activate() }
 
-    ent = ["Beacon", "Booth", "Category", "Company", "CompanyAltName", "CompanyBooth", "CompanyCategory", "Facility", "FieldDetail", "FieldDetailPick",
-        "Location", "LocationProduct", "LocationSchedule", "Map", "MapBooth", "Person", "PersonCategory", "PersonCompany", "PersonFieldDetailPick", "PersonPurchase",
-        "PersonRegistration", "PersonReservation", "Product", "ProductCategory"];
 
     activate() {
+
+        this.getEntities();
 
         var loginInfo = JSON.parse(localStorage.getItem('Login'));
 
@@ -115,6 +121,16 @@ export class PullComponent {
         });
         //debugger;
 
+    }
+
+    getEntities() {
+        this.http.get('/api/Sync/').subscribe(data => {
+
+            this.ent = JSON.parse(data.text());
+            
+        }, error => {
+            alert('Error');
+        });
     }
 
     syncEntities() {
