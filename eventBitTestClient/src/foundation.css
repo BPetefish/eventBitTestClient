@@ -1,4 +1,4 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 /**
  * Foundation for Sites by ZURB
  * Version 6.3.1
@@ -1272,7 +1272,7 @@ select {
     opacity: 0.25;
     cursor: not-allowed; }
     .button.disabled, .button.disabled:hover, .button.disabled:focus, .button[disabled], .button[disabled]:hover, .button[disabled]:focus {
-      background-color: #2ba6cb;
+      background-color: #faa21d;
       color: #fefefe; }
     .button.disabled.primary, .button[disabled].primary {
       opacity: 0.25;
@@ -2122,7 +2122,7 @@ select {
     clear: both; }
   .top-bar,
   .top-bar ul {
-    background-color: #e6e6e6; }
+    background-color: #fefefe; }
   .top-bar input {
     max-width: 200px;
     margin-right: 1rem; }

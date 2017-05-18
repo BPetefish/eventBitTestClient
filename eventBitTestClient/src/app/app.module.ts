@@ -7,9 +7,11 @@ import { AppComponent } from './app.component';
 
 import { PullComponent } from './app.component';
 import { LoginComponent } from './app.component';
-
+import { ToasterModule } from 'angular2-toaster';
 //Import Router
 import { Routes, RouterModule } from '@angular/router';
+
+
 
 export const routes: Routes = [
     { path: '', component: LoginComponent },
@@ -17,7 +19,7 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [BrowserModule, RouterModule.forRoot(routes), FormsModule, HttpModule],
+    imports: [BrowserModule, RouterModule.forRoot(routes), FormsModule, HttpModule, ToasterModule],
     declarations: [AppComponent, PullComponent, LoginComponent],
     bootstrap: [AppComponent]
 })
