@@ -16,39 +16,58 @@ namespace eventBitTestClient.Controllers
     public class SnapshotController : ApiController
     {
         // GET: api/Snapshot
-        public async Task<HttpResponseMessage> Get()
+        [Route("api/Snapshot/{eventName}")]
+        public async Task<HttpResponseMessage> Get(string eventName)
         {
             string reqAuth = Request.Headers.GetValues("X-AUTH-CLAIMS").First();
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
             HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("https://dev.experienteventbit.com/webapi/API/Event/INF999/TrackingData");
+            client.BaseAddress = new Uri("https://dev.experienteventbit.com/webapi/API/Event/");
 
             client.DefaultRequestHeaders.Add("X-AUTH-CLAIMS", reqAuth);
 
-            HttpResponseMessage response = client.GetAsync("").Result;
+            HttpResponseMessage response = client.GetAsync(eventName + "/TrackingData").Result;
 
             string newXAuthHeader = response.Headers.GetValues("X-AUTH-CLAIMS").First();
 
             var data = await response.Content.ReadAsStringAsync();
 
-            var d = JsonConvert.DeserializeObject<TrackedData>(data);
-
-            ProcessTrackedData(d);
-
-            return new HttpResponseMessage()
+            //If I can deserialize this into its object, I got a good response back.
+            try
             {
-                Content = new StringContent(newXAuthHeader, System.Text.Encoding.UTF8, "application/json")
-            };
+                var d = JsonConvert.DeserializeObject<TrackedData>(data);
+
+                ProcessTrackedData(d, eventName);
+
+                HttpResponseMessage r = new HttpResponseMessage();
+
+                r.StatusCode = HttpStatusCode.OK;
+                r.Headers.Add("X-AUTH-CLAIMS", newXAuthHeader);
+                r.Content = new StringContent(string.Empty);
+                return r;
+
+            } catch (Exception e)
+            {
+                //I should have an error here.
+                HttpResponseMessage r = new HttpResponseMessage();
+
+                r.StatusCode = HttpStatusCode.BadRequest;
+                r.Headers.Add("X-AUTH-CLAIMS", newXAuthHeader);
+                r.Content = new StringContent(data);
+                return r;
+            }
+
+            
         }
 
         const string DIR_PATH = @"C:\Users\xFish\Documents\ChunkURITest\";
-        private void ProcessTrackedData(TrackedData d)
+        private void ProcessTrackedData(TrackedData d, string eventName)
         {
             foreach (Table t in d.Tables)
             {
                 //Make Sure My Tables Are Correct
-                CreateUpdateTrackingTables(t);
+                CreateUpdateTrackingTables(t, eventName);
 
                 //DownloadFiles
                 for (int i = 0; i < t.ChunkURIs.Count; i++)
@@ -68,52 +87,20 @@ namespace eventBitTestClient.Controllers
                     //Create Insert Statements
                     foreach (var bd in batchedData)
                     {
-                        string insert = CreateInsertStatement(t.OrderedColumnSchema, t, bd).TrimEnd(',');
+                        string insert = CreateInsertStatement(t.OrderedColumnSchema, t, bd, eventName).TrimEnd(',');
                         RunInsertStatement(insert);
                     }                     
                 }
             }
         }
 
+        #region File Helpers
         public static IEnumerable<List<T>> splitList<T>(List<T> locations, int nSize = 30)
         {
             for (int i = 0; i < locations.Count; i += nSize)
             {
                 yield return locations.GetRange(i, Math.Min(nSize, locations.Count - i));
             }
-        }
-
-        private string CreateInsertStatement(List<string> columns, Table t, List<string> data)
-        {
-            StringBuilder sb = new StringBuilder();
-
-            sb.Append("Insert Into " + t.TableName);
-            sb.Append("(");
-            for (int i = 0; i < t.OrderedColumnSchema.Count; i++)
-            {
-                if (i != 0)
-                    sb.Append(",");
-                sb.Append(t.OrderedColumnSchema[i]);
-            }
-            sb.Append(")");
-            sb.Append(" Values");
-            foreach (string row in data) {
-
-                string[] rowData = row.Split('|');
-
-                sb.Append(" (");
-                for (int i = 0; i < rowData.Length; i++)
-                {
-                    if (i != 0)
-                        sb.Append(",");
-                   
-                    //EVerything is a string.
-                    sb.Append("'" + rowData[i] + "'");
-                }
-                sb.Append("),");
-            }
-
-            return sb.ToString();
         }
 
         public List<string> Decompress(FileInfo fileToDecompress)
@@ -126,40 +113,19 @@ namespace eventBitTestClient.Controllers
                     dataLines.Add(unzip.ReadLine());
 
             return dataLines;
-        }
+        } 
+        #endregion
 
-        private void CreateUpdateTrackingTables(Table t)
+        #region SQL Helpers
+        private void CreateUpdateTrackingTables(Table t, string eventName)
         {
             using (SqlConnection con = new SqlConnection("Data Source=98.204.41.162,49172;Initial Catalog=eventBit;Persist Security Info=True;User ID=Petefish;Password=Pete8901"))
             {
                 var commandStr = "If exists (select name from sysobjects where name = '{0}') drop table {0} CREATE TABLE {0}{1}";
 
-                commandStr = string.Format(commandStr, t.TableName, CreateTableColumns(t.OrderedColumnSchema));
+                commandStr = string.Format(commandStr, eventName + "_" + t.TableName, CreateTableColumns(t.OrderedColumnSchema));
 
                 using (SqlCommand command = new SqlCommand(commandStr, con))
-                {
-                    try
-                    {
-                        con.Open();
-                        command.ExecuteNonQuery();
-                        con.Close();
-                    }
-                    catch (Exception e)
-                    {
-
-                    }
-                }
-
-            }
-        }
-
-        private void RunInsertStatement(string insert)
-        {
-
-            using (SqlConnection con = new SqlConnection("Data Source=98.204.41.162,49172;Initial Catalog=eventBit;Persist Security Info=True;User ID=Petefish;Password=Pete8901"))
-            {                         
-
-                using (SqlCommand command = new SqlCommand(insert, con))
                 {
                     try
                     {
@@ -191,5 +157,63 @@ namespace eventBitTestClient.Controllers
 
             return sb.ToString();
         }
+
+        private string CreateInsertStatement(List<string> columns, Table t, List<string> data, string eventName)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append("Insert Into " + eventName + "_" + t.TableName);
+            sb.Append("(");
+            for (int i = 0; i < t.OrderedColumnSchema.Count; i++)
+            {
+                if (i != 0)
+                    sb.Append(",");
+                sb.Append(t.OrderedColumnSchema[i]);
+            }
+            sb.Append(")");
+            sb.Append(" Values");
+            foreach (string row in data)
+            {
+
+                string[] rowData = row.Split('|');
+
+                sb.Append(" (");
+                for (int i = 0; i < rowData.Length; i++)
+                {
+                    if (i != 0)
+                        sb.Append(",");
+
+                    //EVerything is a string.
+                    sb.Append("'" + rowData[i] + "'");
+                }
+                sb.Append("),");
+            }
+
+            return sb.ToString();
+        }
+
+        private void RunInsertStatement(string insert)
+        {
+
+            using (SqlConnection con = new SqlConnection("Data Source=98.204.41.162,49172;Initial Catalog=eventBit;Persist Security Info=True;User ID=Petefish;Password=Pete8901"))
+            {
+
+                using (SqlCommand command = new SqlCommand(insert, con))
+                {
+                    try
+                    {
+                        con.Open();
+                        command.ExecuteNonQuery();
+                        con.Close();
+                    }
+                    catch (Exception e)
+                    {
+
+                    }
+                }
+
+            }
+        } 
+        #endregion
     }
 }

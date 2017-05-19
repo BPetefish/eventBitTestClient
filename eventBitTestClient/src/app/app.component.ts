@@ -92,12 +92,11 @@ export class LoginComponent {
 export class PullComponent {
 
     public loggedUser: User;
-
     public entSync: string;
-
     public saving: boolean;
-
+    public snapshotSaving: boolean;
     public ent: string[];
+    public showCode: string;
 
     constructor(private http: Http, private toastr: ToasterService) { this.activate() }
 
@@ -128,11 +127,21 @@ export class PullComponent {
     }
 
     syncEntities() {       
-
         this.syncEntityLoop(this.entSync);
     }
 
     syncEntityLoop(entityId: string) {
+
+        if (!this.showCode)
+        {
+            this.toastr.pop('error', 'You provide a show code.');
+            return;
+        }
+
+        if (!entityId) {
+            this.toastr.pop('error', 'You select an entity to sync.');
+            return;
+        }
 
         this.saving = true;
 
@@ -141,7 +150,7 @@ export class PullComponent {
         var headers = new Headers();
         headers.append('X-AUTH-CLAIMS', claim);
 
-        this.http.get('/api/Sync/' + entityId, {
+        this.http.get('/api/Sync/' + entityId + '/' + this.showCode, {
             headers: headers
         }).subscribe(data => {
             //debugger;
@@ -174,17 +183,37 @@ export class PullComponent {
 
     pullSnapShot() {
 
+        if (!this.showCode) {
+            this.toastr.pop('error', 'You provide a show code.');
+            return;
+        }
+
+        this.snapshotSaving = true;
+
         var claim = localStorage.getItem('X-AUTH-CLAIMS');
 
         var headers = new Headers();
         headers.append('X-AUTH-CLAIMS', claim);
 
-        this.http.get('/api/Snapshot', {
+        this.http.get('/api/Snapshot/' + this.showCode, {
             headers: headers
         }).subscribe(data => {
-            localStorage.setItem('X-AUTH-CLAIMS', data.text());
+
+            var claim = data.headers.get('X-AUTH-CLAIMS');
+            localStorage.setItem('X-AUTH-CLAIMS', claim);
+
+            this.snapshotSaving = false;
         }, error => {
 
+            var errors = JSON.parse(error.text());
+
+            for (let e of errors) {
+                if (e.Text) {
+                    this.toastr.pop('error', e.Text);
+                }
+            }
+                       
+            this.snapshotSaving = false;
         });
     }
 

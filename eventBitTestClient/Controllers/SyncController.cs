@@ -99,12 +99,12 @@ namespace eventBitTestClient.Controllers
 
 
         // GET: api/Sync/5
-        public async Task<HttpResponseMessage> Get(string id)
+        [Route("api/Sync/{id}/{eventName}")]
+        public async Task<HttpResponseMessage> Get(string id, string eventName)
         {
             eventBitEntities entities = new eventBitEntities();
             HttpResponseMessage r = new HttpResponseMessage();
 
-            string eventName = "INF999";
             EntityState entityState;
 
 
@@ -121,6 +121,11 @@ namespace eventBitTestClient.Controllers
             string json = await GetEntityResponse(id, eventName, entityState.sysRowStampNumMax);
 
             dynamic d = JsonConvert.DeserializeObject(json);
+
+            //if (d.status)
+            //{
+
+            //}
 
             ResponseDTO rDTO = new ResponseDTO();
             rDTO.Count = ((JArray)d).Count;
