@@ -3,20 +3,18 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using System.Reflection;
 using Newtonsoft.Json.Linq;
-using System.Linq.Expressions;
 using System.Data.SqlClient;
+using System.Net;
 
 namespace eventBitTestClient.Controllers
 {
     public class SyncController : ApiController
     {
-        private string X_AUTH_CLAIMS;
+        private HttpResponseHelper RH = new HttpResponseHelper();
 
         // GET: api/Sync
         public IEnumerable<string> Get()
@@ -50,30 +48,35 @@ namespace eventBitTestClient.Controllers
                                 "Product",
                                 "ProductCategory"
                                  };
-           // return entCol;
+            // return entCol;
         }
 
 
         #region Helpers
-        private async Task<string> GetEntityResponse(string id, string eventName, double? since)
+        private async Task<EntityCallResponse> GetEntityResponse(string id, string eventName, double? since)
         {
-            if (string.IsNullOrEmpty(X_AUTH_CLAIMS))
-                X_AUTH_CLAIMS = Request.Headers.GetValues("X-AUTH-CLAIMS").First();
+
+            string authHeader = Request.Headers.GetValues("X-AUTH-CLAIMS").First();
 
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri("https://dev.experienteventbit.com/webapi/API/Event/" + eventName + "/" + id);
 
-            client.DefaultRequestHeaders.Add("X-AUTH-CLAIMS", X_AUTH_CLAIMS);
+            client.DefaultRequestHeaders.Add("X-AUTH-CLAIMS", authHeader);
 
             HttpResponseMessage response = client.GetAsync("?include=-&max=1000&since=" + since ?? "").Result;
 
             string newXAuthHeader = response.Headers.GetValues("X-AUTH-CLAIMS").First();
 
-            X_AUTH_CLAIMS = newXAuthHeader;
-
             var json = await response.Content.ReadAsStringAsync();
 
-            return json;
+            return new EntityCallResponse() {Content = json, StatusCode = response.StatusCode, X_AUTH_CLAIMS = newXAuthHeader };
+        }
+
+        public class EntityCallResponse
+        {
+            public HttpStatusCode StatusCode { get; set; }
+            public string Content { get; set; }
+            public string X_AUTH_CLAIMS { get; set; }
         }
 
         public static void CopyPropertyValues(object source, object destination)
@@ -103,10 +106,8 @@ namespace eventBitTestClient.Controllers
         public async Task<HttpResponseMessage> Get(string id, string eventName)
         {
             eventBitEntities entities = new eventBitEntities();
-            HttpResponseMessage r = new HttpResponseMessage();
 
             EntityState entityState;
-
 
             entityState = entities.EntityStates.FirstOrDefault(x => x.ShowCode == eventName && x.EntityID == id);
             if (entityState == null)
@@ -114,27 +115,28 @@ namespace eventBitTestClient.Controllers
                 entityState = new EntityState();
                 entityState.EntityID = id;
                 entityState.ShowCode = eventName;
-                //entities.EntityStates.Add(entityState);
             }
 
+            EntityCallResponse resp = await GetEntityResponse(id, eventName, entityState.sysRowStampNumMax);
 
-            string json = await GetEntityResponse(id, eventName, entityState.sysRowStampNumMax);
+            
 
-            dynamic d = JsonConvert.DeserializeObject(json);
+            //Error Check This Out.
+            if (resp == null || resp.StatusCode != HttpStatusCode.OK)
+            {
+                //If I have a status, I am going to assume this is an error.
+                return RH.BadRequest(resp.X_AUTH_CLAIMS, resp.Content);
+            }
 
-            //if (d.status)
-            //{
-
-            //}
+            var d = JsonConvert.DeserializeObject(resp.Content);
 
             ResponseDTO rDTO = new ResponseDTO();
             rDTO.Count = ((JArray)d).Count;
-            //if (((JArray)d).Count <= 0)
-            //    break;
 
             //Sync Data Here
             //There has to be a way I can get this to be more generic.
-            if (rDTO.Count > 0) {
+            if (rDTO.Count > 0)
+            {
                 try
                 {
                     //There has to be a way to make this SUPER generic. 
@@ -148,16 +150,12 @@ namespace eventBitTestClient.Controllers
                 }
                 catch (Exception e)
                 {
-
+                    return RH.BadRequest(resp.X_AUTH_CLAIMS, e.InnerException.ToString());
                 }
             }
 
+            return RH.OK(resp.X_AUTH_CLAIMS, JsonConvert.SerializeObject(rDTO));
 
-
-            r.StatusCode = HttpStatusCode.OK;
-            r.Headers.Add("X-AUTH-CLAIMS", X_AUTH_CLAIMS);
-            r.Content = new StringContent(JsonConvert.SerializeObject(rDTO));
-            return r;
         }
 
         private class ResponseDTO
@@ -193,7 +191,7 @@ namespace eventBitTestClient.Controllers
             }
             entities.SaveChanges();
             //Expression Tree? Maybe?
-  
+
         }
 
         //I May want to send responses back so I can give the user a snapshot of whats going on.

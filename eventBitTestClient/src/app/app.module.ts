@@ -12,6 +12,9 @@ import { ToasterModule } from 'angular2-toaster';
 import { Routes, RouterModule } from '@angular/router';
 
 
+import { DatePipe } from '@angular/common'
+
+
 
 export const routes: Routes = [
     { path: '', component: LoginComponent },
@@ -21,6 +24,7 @@ export const routes: Routes = [
 @NgModule({
     imports: [BrowserModule, RouterModule.forRoot(routes), FormsModule, HttpModule, ToasterModule],
     declarations: [AppComponent, PullComponent, LoginComponent],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    providers: [DatePipe]
 })
 export class AppModule { }

@@ -34,31 +34,27 @@ namespace eventBitTestClient.Controllers
             var data = await response.Content.ReadAsStringAsync();
 
             //If I can deserialize this into its object, I got a good response back.
-            try
+            HttpResponseMessage r = new HttpResponseMessage();
+            if (response.StatusCode == HttpStatusCode.OK)
             {
                 var d = JsonConvert.DeserializeObject<TrackedData>(data);
 
                 ProcessTrackedData(d, eventName);
 
-                HttpResponseMessage r = new HttpResponseMessage();
-
                 r.StatusCode = HttpStatusCode.OK;
                 r.Headers.Add("X-AUTH-CLAIMS", newXAuthHeader);
                 r.Content = new StringContent(string.Empty);
                 return r;
-
-            } catch (Exception e)
+            }
+            else
             {
-                //I should have an error here.
-                HttpResponseMessage r = new HttpResponseMessage();
-
                 r.StatusCode = HttpStatusCode.BadRequest;
                 r.Headers.Add("X-AUTH-CLAIMS", newXAuthHeader);
                 r.Content = new StringContent(data);
                 return r;
             }
 
-            
+
         }
 
         const string DIR_PATH = @"C:\Users\xFish\Documents\ChunkURITest\";
@@ -89,7 +85,7 @@ namespace eventBitTestClient.Controllers
                     {
                         string insert = CreateInsertStatement(t.OrderedColumnSchema, t, bd, eventName).TrimEnd(',');
                         RunInsertStatement(insert);
-                    }                     
+                    }
                 }
             }
         }
@@ -113,7 +109,7 @@ namespace eventBitTestClient.Controllers
                     dataLines.Add(unzip.ReadLine());
 
             return dataLines;
-        } 
+        }
         #endregion
 
         #region SQL Helpers
@@ -213,7 +209,7 @@ namespace eventBitTestClient.Controllers
                 }
 
             }
-        } 
+        }
         #endregion
     }
 }

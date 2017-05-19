@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
 import { Router } from '@angular/router';
 import { Http, Response, Headers } from '@angular/http';
 
-
+import { DatePipe } from '@angular/common'
 
 import { loginDTO } from './Login/loginDTO';
 import { LoginSessionData } from './Login/LoginSessionData'
@@ -97,23 +97,21 @@ export class PullComponent {
     public snapshotSaving: boolean;
     public ent: string[];
     public showCode: string;
+    private log: string[];
+    public taText : string;
 
-    constructor(private http: Http, private toastr: ToasterService) { this.activate() }
-
-
-    activate() {
+    constructor(private http: Http, private toastr: ToasterService, private datePipe: DatePipe) {
 
         this.getEntities();
 
         var loginInfo = JSON.parse(localStorage.getItem('Login'));
 
-
+        this.log = [];
         this.loggedUser = new User();
 
         this.loggedUser.FirstName = loginInfo.FirstName;
         this.loggedUser.LastName = loginInfo.LastName;
         this.loggedUser.Email = loginInfo.Email;
-
     }
 
     getEntities() {
@@ -145,6 +143,8 @@ export class PullComponent {
 
         this.saving = true;
 
+        this.logText("Sending request to sync '" + entityId + "'");
+
         var claim = localStorage.getItem('X-AUTH-CLAIMS');
 
         var headers = new Headers();
@@ -164,20 +164,29 @@ export class PullComponent {
 
             if (resp && resp.Count)
             {
-                console.log(entityId + ' just synced ' + resp.Count);
+                this.logText("Processed " + resp.Count + " rows for entity '" + entityId + "'");
 
                 if (resp.Count > 0)
                     this.syncEntityLoop(entityId)              
                  
             } else if (resp && resp.Count == 0)
             {
-                console.log(entityId + ' just synced ' + resp.Count);
+                //this.logText("Processed " + resp.count + " rows for entity '" + entityId + "'");
+                this.logText("Received back zero rows for request. '" + entityId + "' currently up to date.")
+
                 this.toastr.pop('success', entityId + ' received zero entires back with latest since stamp, sync is complete.')
             }
 
         }, error => {
             this.saving = false;
-            alert('Error');
+            var errors = JSON.parse(error.text());
+
+            for (let e of errors) {
+                if (e.Text) {
+                    this.toastr.pop('error', e.Text);
+                    this.logText(e.Text);
+                }
+            }
         });
     }
 
@@ -210,6 +219,7 @@ export class PullComponent {
             for (let e of errors) {
                 if (e.Text) {
                     this.toastr.pop('error', e.Text);
+                    this.logText(e.Text);
                 }
             }
                        
@@ -217,6 +227,17 @@ export class PullComponent {
         });
     }
 
+    logText(text: string) {
+
+        var d = this.datePipe.transform(new Date(), 'MM/dd/y hh:mm:ss a')
+
+        this.log.push(d + ": " + text);
+
+        var revLog = this.log.slice();
+
+        this.taText = revLog.reverse().join("\n");
+
+    }
 }
 
 
