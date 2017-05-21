@@ -12,9 +12,9 @@ namespace eventBitTestClient.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class SnapshotLog
+    public partial class SnapshotState
     {
-        public System.DateTime EntityName { get; set; }
-        public string SnapshotId { get; set; }
+        public string ShowCode { get; set; }
+        public string UniqueIdentifier { get; set; }
     }
 }

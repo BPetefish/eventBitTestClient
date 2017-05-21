@@ -124,7 +124,6 @@ namespace eventBitTestClient.Controllers
             //Error Check This Out.
             if (resp == null || resp.StatusCode != HttpStatusCode.OK)
             {
-                //If I have a status, I am going to assume this is an error.
                 return RH.BadRequest(resp.X_AUTH_CLAIMS, resp.Content);
             }
 

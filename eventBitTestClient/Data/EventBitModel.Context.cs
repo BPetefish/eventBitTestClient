@@ -25,7 +25,6 @@ namespace eventBitTestClient.Data
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<SnapshotLog> SnapshotLogs { get; set; }
         public virtual DbSet<EntityState> EntityStates { get; set; }
         public virtual DbSet<EntBooth> EntBooths { get; set; }
         public virtual DbSet<EntCategory> EntCategories { get; set; }
@@ -53,5 +52,6 @@ namespace eventBitTestClient.Data
         public virtual DbSet<EntBoothCategory> EntBoothCategories { get; set; }
         public virtual DbSet<EntFieldDetailCategory> EntFieldDetailCategories { get; set; }
         public virtual DbSet<EntFieldDetailPickCategory> EntFieldDetailPickCategories { get; set; }
+        public virtual DbSet<SnapshotState> SnapshotStates { get; set; }
     }
 }

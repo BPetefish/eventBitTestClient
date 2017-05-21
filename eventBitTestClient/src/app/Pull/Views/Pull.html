@@ -14,14 +14,19 @@
             <li><a href="#">Three</a></li>-->
         </ul>
     </div>
-    <div class="top-bar-right">
+    <!--<div class="top-bar-right">
         <ul class="menu">
-            <li>Welcome, {{loggedUser.FirstName}}!</li>
+            <li></li>
         </ul>
-    </div>
+    </div>-->
 </div>
 <div class="row rounded" style="background-color:#ffffff;">    
     <div class="large-12 columns">
+        <div class="row">
+            <div class="large-12 columns text-right">
+                Welcome, {{loggedUser.FirstName}}!
+            </div>
+        </div>        
         <div class="row">
             <div class="large-12 columns">
                 <label>Show Code<input [(ngModel)]="showCode" type="text" placeholder="INF999" /></label>
@@ -30,25 +35,33 @@
         <h2>Incremental Entity Feeds</h2>
         <p>Please be aware, some entities make take some time to sync the first time. (i.e. Person)</p>
 
-        <div class="row">
-            <div class="large-12 columns">
-                <label>Entity
-                    <select [(ngModel)]="entSync">
-                        <option value="">--- Please Select ---</option>
-                        <option *ngFor="let e of ent" value="{{e}}">{{e}}</option>
-                    </select>
-                </label>
+        <div [hidden]="!loading"><h3>Loading... <i class="fa fa-spinner fa-spin fa-fw"></i></h3></div>
+        <div [hidden]="loading">
+            <div class="row">
+                <div class="large-12 columns">
+                    <label>
+                        Entity
+                        <select [(ngModel)]="entSync">
+                            <option value="">--- Please Select ---</option>
+                            <option *ngFor="let e of ent" value="{{e}}">{{e}}</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="large-12 columns">
+                    <button [disabled]="saving" (click)="syncEntities()" type="button" class="button expanded">Sync Entity <span [hidden]="!saving"><i class="fa fa-spinner fa-spin fa-fw"></i></span></button>
+                </div>
             </div>
         </div>
         <div class="row">
             <div class="large-12 columns">
-                <button [disabled]="saving" (click)="syncEntities()" type="button" class="button expanded">Sync Entity <span [hidden]="!saving"><i class="fa fa-spinner fa-spin fa-fw"></i></span></button>
+               <textarea class="copyArea" readonly rows="20" [(ngModel)]="taText"></textarea>
             </div>
         </div>
         <div class="row">
-            <div class="large-12 columns">
-               <textarea readonly rows="20" [(ngModel)]="taText"></textarea>
-            </div>
+            <div class="large-6 columns"><button (click)="clearLog()" class="button secondary expanded">Clear</button></div>
+            <div class="large-6 columns"><button class="button secondary expanded">Copy</button></div>
         </div>
         <h2>Tracked Dump Snapshots</h2>
         <div class="row">

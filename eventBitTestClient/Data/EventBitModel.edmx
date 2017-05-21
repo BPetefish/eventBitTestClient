@@ -602,14 +602,12 @@
           <Property Name="sysUpdateDateEpoch" Type="float" />
           <Property Name="sysUpdatedBy" Type="varchar(max)" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'eventBit.dbo.SnapshotLog' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="SnapshotLog">
+        <EntityType Name="SnapshotState">
           <Key>
-            <PropertyRef Name="EntityName" />
+            <PropertyRef Name="ShowCode" />
           </Key>
-          <Property Name="EntityName" Type="datetime" Nullable="false" />
-          <Property Name="SnapshotId" Type="nvarchar" MaxLength="50" />
+          <Property Name="ShowCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UniqueIdentifier" Type="varchar(max)" />
         </EntityType>
         <EntityContainer Name="eventBitModelStoreContainer">
           <EntitySet Name="Booth" EntityType="Self.Booth" Schema="dbo" store:Type="Tables" />
@@ -639,26 +637,13 @@ warning 6002: The table/view 'eventBit.dbo.SnapshotLog' does not have a primary 
           <EntitySet Name="PersonReservation" EntityType="Self.PersonReservation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductCategory" EntityType="Self.ProductCategory" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="SnapshotLog" EntityType="Self.SnapshotLog" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [SnapshotLog].[EntityName] AS [EntityName], 
-    [SnapshotLog].[SnapshotId] AS [SnapshotId]
-    FROM [dbo].[SnapshotLog] AS [SnapshotLog]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="SnapshotState" EntityType="Self.SnapshotState" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="eventBitModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="SnapshotLog">
-          <Key>
-            <PropertyRef Name="EntityName" />
-          </Key>
-          <Property Name="EntityName" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="SnapshotId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityContainer Name="eventBitEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="SnapshotLogs" EntityType="Self.SnapshotLog" />
           <EntitySet Name="EntityStates" EntityType="eventBitModel.EntityState" />
           <EntitySet Name="EntBooths" EntityType="eventBitModel.EntBooth" />
           <EntitySet Name="EntCategories" EntityType="eventBitModel.EntCategory" />
@@ -686,6 +671,7 @@ warning 6002: The table/view 'eventBit.dbo.SnapshotLog' does not have a primary 
           <EntitySet Name="EntBoothCategories" EntityType="eventBitModel.EntBoothCategory" />
           <EntitySet Name="EntFieldDetailCategories" EntityType="eventBitModel.EntFieldDetailCategory" />
           <EntitySet Name="EntFieldDetailPickCategories" EntityType="eventBitModel.EntFieldDetailPickCategory" />
+          <EntitySet Name="SnapshotStates" EntityType="eventBitModel.SnapshotState" />
           </EntityContainer>
         <EntityType Name="EntityState">
           <Key>
@@ -1284,20 +1270,19 @@ warning 6002: The table/view 'eventBit.dbo.SnapshotLog' does not have a primary 
           <Property Name="sysUpdateDateEpoch" Type="Double" />
           <Property Name="sysUpdatedBy" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="SnapshotState">
+          <Key>
+            <PropertyRef Name="ShowCode" />
+          </Key>
+          <Property Name="ShowCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UniqueIdentifier" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="eventBitModelStoreContainer" CdmEntityContainer="eventBitEntities">
-          <EntitySetMapping Name="SnapshotLogs">
-            <EntityTypeMapping TypeName="eventBitModel.SnapshotLog">
-              <MappingFragment StoreEntitySet="SnapshotLog">
-                <ScalarProperty Name="EntityName" ColumnName="EntityName" />
-                <ScalarProperty Name="SnapshotId" ColumnName="SnapshotId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="EntityStates">
             <EntityTypeMapping TypeName="eventBitModel.EntityState">
               <MappingFragment StoreEntitySet="EntityState">
@@ -1918,6 +1903,14 @@ warning 6002: The table/view 'eventBit.dbo.SnapshotLog' does not have a primary 
                 <ScalarProperty Name="FieldDetailPickID" ColumnName="FieldDetailPickID" />
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
                 <ScalarProperty Name="FieldDetailPickCategoryID" ColumnName="FieldDetailPickCategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SnapshotStates">
+            <EntityTypeMapping TypeName="eventBitModel.SnapshotState">
+              <MappingFragment StoreEntitySet="SnapshotState">
+                <ScalarProperty Name="UniqueIdentifier" ColumnName="UniqueIdentifier" />
+                <ScalarProperty Name="ShowCode" ColumnName="ShowCode" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

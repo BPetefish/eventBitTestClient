@@ -37,6 +37,17 @@ export class LoginComponent {
         this.model = new loginDTO();
         this.remMe = false;
         this.logging = false;
+
+        if (document.cookie)
+        {
+            var cookies = document.cookie.split(';');
+
+            var userName = cookies[0].split('=')[1];
+
+            this.model.Username = userName;
+            this.remMe = true;
+        }
+
     }
 
     login() {
@@ -48,7 +59,14 @@ export class LoginComponent {
         }
 
         if (this.remMe) {
-            document.cookie = "username=" + this.model.Username + "; expires=" + new Date() + 120;
+
+            var now = new Date();
+            var expDate = new Date();
+            expDate.setDate(now.getDate() + 120);
+
+            document.cookie = "username=" + this.model.Username + "; expires=" + expDate.toUTCString();
+        } else {
+            document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
         }
 
 
@@ -98,7 +116,8 @@ export class PullComponent {
     public ent: string[];
     public showCode: string;
     private log: string[];
-    public taText : string;
+    public taText: string;
+    public loading: boolean;
 
     constructor(private http: Http, private toastr: ToasterService, private datePipe: DatePipe) {
 
@@ -112,12 +131,15 @@ export class PullComponent {
         this.loggedUser.FirstName = loginInfo.FirstName;
         this.loggedUser.LastName = loginInfo.LastName;
         this.loggedUser.Email = loginInfo.Email;
+
+        this.loading = true;
     }
 
     getEntities() {
         this.http.get('/api/Sync/').subscribe(data => {
 
             this.ent = JSON.parse(data.text());
+            this.loading = false;
 
         }, error => {
             alert('Error');
@@ -199,6 +221,8 @@ export class PullComponent {
 
         this.snapshotSaving = true;
 
+        this.logText("Snapshot request for event: " + this.showCode);
+
         var claim = localStorage.getItem('X-AUTH-CLAIMS');
 
         var headers = new Headers();
@@ -207,6 +231,9 @@ export class PullComponent {
         this.http.get('/api/Snapshot/' + this.showCode, {
             headers: headers
         }).subscribe(data => {
+
+            this.toastr.pop('success', data.text());
+            this.logText(data.text());
 
             var claim = data.headers.get('X-AUTH-CLAIMS');
             localStorage.setItem('X-AUTH-CLAIMS', claim);
@@ -237,6 +264,18 @@ export class PullComponent {
 
         this.taText = revLog.reverse().join("\n");
 
+    }
+
+    clearLog() {
+
+        this.log = [];
+        this.taText = "";
+    }
+
+    copyLog() {
+      //  var ca = document.querySelector('.copyArea');
+
+      //  ca.select()
     }
 }
 

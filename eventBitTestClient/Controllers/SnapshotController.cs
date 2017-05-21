@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using eventBitTestClient.Data;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -13,12 +14,18 @@ using System.Web.Http;
 
 namespace eventBitTestClient.Controllers
 {
+   
     public class SnapshotController : ApiController
     {
+
+        private HttpResponseHelper RH = new HttpResponseHelper();
         // GET: api/Snapshot
         [Route("api/Snapshot/{eventName}")]
         public async Task<HttpResponseMessage> Get(string eventName)
         {
+            eventBitEntities entities = new eventBitEntities();
+
+            //Grab my X-AUTH from header.
             string reqAuth = Request.Headers.GetValues("X-AUTH-CLAIMS").First();
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
@@ -33,25 +40,37 @@ namespace eventBitTestClient.Controllers
 
             var data = await response.Content.ReadAsStringAsync();
 
-            //If I can deserialize this into its object, I got a good response back.
+            //Check for error
             HttpResponseMessage r = new HttpResponseMessage();
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 var d = JsonConvert.DeserializeObject<TrackedData>(data);
 
+                SnapshotState ssState;
+                //Check my snapshot id.
+                ssState = entities.SnapshotStates.FirstOrDefault(x => x.ShowCode == eventName);
+                
+                if (ssState != null)
+                {
+                    if (ssState.UniqueIdentifier == d.UniqueIdentifier)
+                        return RH.OK(newXAuthHeader, "Snapshot unique identifier matches currently loaded snapshot, no new snapshot available.");
+                } else
+                {
+                    ssState = new SnapshotState();
+                    ssState.ShowCode = eventName;
+                    entities.SnapshotStates.Add(ssState);
+                }
+
                 ProcessTrackedData(d, eventName);
 
-                r.StatusCode = HttpStatusCode.OK;
-                r.Headers.Add("X-AUTH-CLAIMS", newXAuthHeader);
-                r.Content = new StringContent(string.Empty);
-                return r;
+                ssState.UniqueIdentifier = d.UniqueIdentifier;
+                entities.SaveChanges();
+
+                return RH.OK(newXAuthHeader, "Snapshot sync complete.");
             }
             else
             {
-                r.StatusCode = HttpStatusCode.BadRequest;
-                r.Headers.Add("X-AUTH-CLAIMS", newXAuthHeader);
-                r.Content = new StringContent(data);
-                return r;
+                return RH.BadRequest(newXAuthHeader, data);
             }
 
 

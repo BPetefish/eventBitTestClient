@@ -348,7 +348,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EventBitModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Data\SnapshotLog.cs">
+    <Compile Include="Data\SnapshotState.cs">
       <DependentUpon>EventBitModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
