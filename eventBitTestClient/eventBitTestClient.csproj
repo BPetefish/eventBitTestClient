@@ -367,12 +367,9 @@
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
     <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.css" />
-    <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\toastr.css" />
-    <Content Include="Content\toastr.min.css" />
     <Content Include="Data\EventBitModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>EventBitModel.edmx</DependentUpon>
@@ -420,8 +417,6 @@
     <Content Include="Data\EventBitModel.edmx.diagram">
       <DependentUpon>EventBitModel.edmx</DependentUpon>
     </Content>
-    <Content Include="Content\toastr.scss" />
-    <Content Include="Content\toastr.less" />
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.woff" />
@@ -456,9 +451,10 @@
     <Content Include="src\foundation\jquery.js" />
     <Content Include="src\foundation\what-input.js" />
     <Content Include="src\images\logo.png" />
+    <Content Include="src\images\TopBarBanner.png" />
     <Content Include="src\index.html" />
     <Content Include="src\app\Styles\login.css" />
-    <Content Include="src\style.css" />
+    <Content Include="src\site.css" />
     <Content Include="src\systemjs-angular-loader.js" />
     <Content Include="src\systemjs.config.extras.js" />
     <Content Include="src\systemjs.config.js" />

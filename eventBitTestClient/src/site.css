@@ -1,0 +1,25 @@
+﻿body {
+    background-color:dimgray;
+}
+
+.login-box{
+    background-color:white;
+    border-radius: 25px;
+    padding-top:10px;
+     padding-bottom:10px;
+}
+
+.top-bar{
+    border-bottom: 1px solid #808080;
+}
+
+
+.pull-rounded{
+ 
+    border-radius: 0px 0px 25px 25px;
+
+}
+
+.field-label{
+    font-weight:bold;
+}

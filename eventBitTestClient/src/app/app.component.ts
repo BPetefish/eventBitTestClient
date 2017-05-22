@@ -25,7 +25,6 @@ export class AppComponent {}
 @Component({
     selector: 'app-login',
     templateUrl: 'App/Login/Login.html',
-    styleUrls: ['App/Styles/login.css'],
 })
 export class LoginComponent {
 
@@ -139,6 +138,7 @@ export class PullComponent {
         this.http.get('/api/Sync/').subscribe(data => {
 
             this.ent = JSON.parse(data.text());
+            this.entSync = "";
             this.loading = false;
 
         }, error => {
@@ -154,7 +154,7 @@ export class PullComponent {
 
         if (!this.showCode)
         {
-            this.toastr.pop('error', 'You provide a show code.');
+            this.toastr.pop('error', 'You must provide a show code.');
             return;
         }
 
@@ -215,7 +215,7 @@ export class PullComponent {
     pullSnapShot() {
 
         if (!this.showCode) {
-            this.toastr.pop('error', 'You provide a show code.');
+            this.toastr.pop('error', 'You must provide a show code.');
             return;
         }
 
@@ -270,12 +270,6 @@ export class PullComponent {
 
         this.log = [];
         this.taText = "";
-    }
-
-    copyLog() {
-      //  var ca = document.querySelector('.copyArea');
-
-      //  ca.select()
     }
 }
 

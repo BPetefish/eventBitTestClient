@@ -1,7 +1,7 @@
-﻿<div class="top-bar">
+﻿<div class="top-bar sticky">
     <div class="top-bar-left">
         <ul class="dropdown menu" data-dropdown-menu>
-            <li class="menu-text">eventBit test harness<!--<img width="50px" src="images/logo.png" />--></li>
+            <li class="menu-text"><!--eventBit test harness--><img src="images/TopBarBanner.png" /></li>
             <!--<li>
                 <a href="#">One</a>
                 <ul class="menu vertical">
@@ -20,16 +20,26 @@
         </ul>
     </div>-->
 </div>
-<div class="row rounded" style="background-color:#ffffff;">    
+<div class="row pull-rounded" style="background-color:#ffffff;">    
     <div class="large-12 columns">
         <div class="row">
             <div class="large-12 columns text-right">
                 Welcome, {{loggedUser.FirstName}}!
             </div>
-        </div>        
+        </div>   
+        <!--<div class="row">
+            <div class="large-12 columns">
+                <h1>eventBit test harness</h1>
+            </div>
+        </div>-->     
         <div class="row">
             <div class="large-12 columns">
-                <label>Show Code<input [(ngModel)]="showCode" type="text" placeholder="INF999" /></label>
+                A show code is required for all actions.
+            </div>
+        </div>     
+        <div class="row">
+            <div class="large-12 columns">
+                <label class="field-label">Show Code<input [(ngModel)]="showCode" type="text" placeholder="INF999" /></label>
             </div>
         </div>
         <h2>Incremental Entity Feeds</h2>
@@ -39,7 +49,7 @@
         <div [hidden]="loading">
             <div class="row">
                 <div class="large-12 columns">
-                    <label>
+                    <label class="field-label">
                         Entity
                         <select [(ngModel)]="entSync">
                             <option value="">--- Please Select ---</option>
@@ -56,12 +66,14 @@
         </div>
         <div class="row">
             <div class="large-12 columns">
-               <textarea class="copyArea" readonly rows="20" [(ngModel)]="taText"></textarea>
+                <label class="field-label">Sync Log
+                    <textarea class="copyArea" readonly rows="20" [(ngModel)]="taText"></textarea>
+                </label>
             </div>
         </div>
         <div class="row">
-            <div class="large-6 columns"><button (click)="clearLog()" class="button secondary expanded">Clear</button></div>
-            <div class="large-6 columns"><button class="button secondary expanded">Copy</button></div>
+            <div class="large-12 columns"><button [disabled]="!taText" (click)="clearLog()" class="button secondary expanded round">Clear</button></div>
+            <!--<div class="large-6 columns"><button class="button secondary expanded">Copy</button></div>-->
         </div>
         <h2>Tracked Dump Snapshots</h2>
         <div class="row">
