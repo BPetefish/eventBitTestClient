@@ -118,7 +118,7 @@ export class PullComponent {
     public taText: string;
     public loading: boolean;
 
-    constructor(private http: Http, private toastr: ToasterService, private datePipe: DatePipe) {
+    constructor(private http: Http, private toastr: ToasterService, private datePipe: DatePipe, private router: Router) {
 
         this.getEntities();
 
@@ -169,6 +169,10 @@ export class PullComponent {
         this.logText("Sending request to sync '" + entityId + "'");
 
         var claim = localStorage.getItem('X-AUTH-CLAIMS');
+
+        //Check for timeout and such.
+        if (!this.IsHeaderValid(claim))
+            return;
 
         var headers = new Headers();
         headers.append('X-AUTH-CLAIMS', claim);
@@ -226,6 +230,9 @@ export class PullComponent {
 
         var claim = localStorage.getItem('X-AUTH-CLAIMS');
 
+        if (!this.IsHeaderValid(claim))
+            return;
+
         var headers = new Headers();
         headers.append('X-AUTH-CLAIMS', claim);
 
@@ -257,7 +264,7 @@ export class PullComponent {
 
     logText(text: string) {
 
-        var d = this.datePipe.transform(new Date(), 'MM/dd/y hh:mm:ss a')
+        var d = this.datePipe.transform(new Date(), 'MM/dd/y hh:mm:ss a');
 
         this.log.push(d + ": " + text);
 
@@ -271,6 +278,18 @@ export class PullComponent {
 
         this.log = [];
         this.taText = "";
+    }
+
+    IsHeaderValid(claim:string) {
+        var header = JSON.parse(claim);
+
+        if (header.Expires && (header.Expires - (new Date).getTime()) <= 0) {
+            this.router.navigateByUrl('/');
+            this.toastr.pop('error', 'Your session has timed out');
+            return false;   
+        }
+
+        return true;
     }
 }
 

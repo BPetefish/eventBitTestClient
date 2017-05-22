@@ -105,16 +105,20 @@ namespace eventBitTestClient.Controllers
         [Route("api/Sync/{id}/{eventName}")]
         public async Task<HttpResponseMessage> Get(string id, string eventName)
         {
-            eventBitEntities entities = new eventBitEntities();
 
             EntityState entityState;
 
-            entityState = entities.EntityStates.FirstOrDefault(x => x.ShowCode == eventName && x.EntityID == id);
-            if (entityState == null)
+            //Clear up data structures
+            using (eventBitEntities entities = new eventBitEntities())
             {
-                entityState = new EntityState();
-                entityState.EntityID = id;
-                entityState.ShowCode = eventName;
+
+                entityState = entities.EntityStates.FirstOrDefault(x => x.ShowCode == eventName && x.EntityID == id);
+                if (entityState == null)
+                {
+                    entityState = new EntityState();
+                    entityState.EntityID = id;
+                    entityState.ShowCode = eventName;
+                }
             }
 
             EntityCallResponse resp = await GetEntityResponse(id, eventName, entityState.sysRowStampNumMax);
@@ -143,7 +147,7 @@ namespace eventBitTestClient.Controllers
                     //ProcessDataToEntities(entities, entityState, d, id);
                     int sysEventId = 0;
 
-                    GenericSwitchToAssignTypes(entities, d, id, out sysEventId);
+                    GenericSwitchToAssignTypes(d, id, out sysEventId);
 
                     UpdateEntitySyncLog(id, eventName, sysEventId);
                 }
@@ -162,40 +166,44 @@ namespace eventBitTestClient.Controllers
             public int Count { get; set; }
         }
 
-        private void ProcessDataToEntitiesGeneric<T>(eventBitEntities entities, dynamic d, string id, out int sysEventID) where T : class
+        private void ProcessDataToEntitiesGeneric<T>(dynamic d, string id, out int sysEventID) where T : class
         {
             // var ent = entities.Set<t.GetType()>();
-            var table = entities.Set<T>();
-
-            //I pass in show code but everything is based on sysEventId??
-            sysEventID = 0;
-            foreach (JObject data in d)
+            //I want to make sure I dispose of this here
+            using (eventBitEntities entities = new eventBitEntities())
             {
-                var jsonEnt = data.ToObject<T>();
+                var table = entities.Set<T>();
 
-                int pKey = Convert.ToInt32(jsonEnt.GetType().GetProperty(id + "ID").GetValue(jsonEnt, null));
-
-                if (sysEventID == 0)
+                //I pass in show code but everything is based on sysEventId??
+                sysEventID = 0;
+                foreach (JObject data in d)
                 {
-                    sysEventID = Convert.ToInt32(jsonEnt.GetType().GetProperty("sysEventID").GetValue(jsonEnt, null));
+                    var jsonEnt = data.ToObject<T>();
+
+                    int pKey = Convert.ToInt32(jsonEnt.GetType().GetProperty(id + "ID").GetValue(jsonEnt, null));
+
+                    if (sysEventID == 0)
+                    {
+                        sysEventID = Convert.ToInt32(jsonEnt.GetType().GetProperty("sysEventID").GetValue(jsonEnt, null));
+                    }
+
+                    var ent = table.Find(pKey);
+
+                    if (ent == null)
+                        table.Add(jsonEnt);
+                    else
+                        CopyPropertyValues(jsonEnt, ent);
+
                 }
-
-                var ent = table.Find(pKey);
-
-                if (ent == null)
-                    table.Add(jsonEnt);
-                else
-                    CopyPropertyValues(jsonEnt, ent);
-
+                entities.SaveChanges();
             }
-            entities.SaveChanges();
             //Expression Tree? Maybe?
 
         }
 
         //I May want to send responses back so I can give the user a snapshot of whats going on.
         //Of course I can always just fake the loading bar.
-        private void GenericSwitchToAssignTypes(eventBitEntities entities, dynamic d, string id, out int sysEventID)
+        private void GenericSwitchToAssignTypes(dynamic d, string id, out int sysEventID)
         {
             sysEventID = 0;
             switch (id)
@@ -203,168 +211,168 @@ namespace eventBitTestClient.Controllers
                 #region 1) Booth
                 case "Booth":
                     {
-                        ProcessDataToEntitiesGeneric<EntBooth>(entities, d, id, out sysEventID);
+                        ProcessDataToEntitiesGeneric<EntBooth>(d, id, out sysEventID);
                     }
                     break;
                 #endregion
                 #region 2) BoothCategory
                 case "BoothCategory":
                     {
-                        ProcessDataToEntitiesGeneric<EntBoothCategory>(entities, d, id, out sysEventID);
+                        ProcessDataToEntitiesGeneric<EntBoothCategory>(d, id, out sysEventID);
                     }
                     break;
                 #endregion
                 #region 3) Category
                 case "Category":
                     {
-                        ProcessDataToEntitiesGeneric<EntCategory>(entities, d, id, out sysEventID);
+                        ProcessDataToEntitiesGeneric<EntCategory>(d, id, out sysEventID);
                     }
                     break;
                 #endregion
                 #region 4) Company
                 case "Company":
                     {
-                        ProcessDataToEntitiesGeneric<EntCompany>(entities, d, id, out sysEventID);
+                        ProcessDataToEntitiesGeneric<EntCompany>(d, id, out sysEventID);
                     }
                     break;
                 #endregion
                 #region 5) CompanyAltName
                 case "CompanyAltName":
                     {
-                        ProcessDataToEntitiesGeneric<EntCompanyAltName>(entities, d, id, out sysEventID);
+                        ProcessDataToEntitiesGeneric<EntCompanyAltName>(d, id, out sysEventID);
                     }
                     break;
                 #endregion
                 #region 6) CompanyBooth
                 case "CompanyBooth":
                     {
-                        ProcessDataToEntitiesGeneric<EntCompanyBooth>(entities, d, id, out sysEventID);
+                        ProcessDataToEntitiesGeneric<EntCompanyBooth>(d, id, out sysEventID);
                     }
                     break;
                 #endregion
                 #region 7) CompanyCategory
                 case "CompanyCategory":
                     {
-                        ProcessDataToEntitiesGeneric<EntCompanyCategory>(entities, d, id, out sysEventID);
+                        ProcessDataToEntitiesGeneric<EntCompanyCategory>(d, id, out sysEventID);
                     }
                     break;
                 #endregion
                 #region 8) Facility
                 case "Facility":
                     {
-                        ProcessDataToEntitiesGeneric<EntFacility>(entities, d, id, out sysEventID);
+                        ProcessDataToEntitiesGeneric<EntFacility>(d, id, out sysEventID);
                     }
                     break;
                 #endregion
                 #region 9) FieldDetail
                 case "FieldDetail":
                     {
-                        ProcessDataToEntitiesGeneric<EntFieldDetail>(entities, d, id, out sysEventID);
+                        ProcessDataToEntitiesGeneric<EntFieldDetail>(d, id, out sysEventID);
                     }
                     break;
                 #endregion
                 #region 10) FieldDetailCategory
                 case "FieldDetailCategory":
                     {
-                        ProcessDataToEntitiesGeneric<EntFieldDetailCategory>(entities, d, id, out sysEventID);
+                        ProcessDataToEntitiesGeneric<EntFieldDetailCategory>(d, id, out sysEventID);
                     }
                     break;
                 #endregion
                 #region 11) FieldDetailPick
                 case "FieldDetailPick":
                     {
-                        ProcessDataToEntitiesGeneric<EntFieldDetailPick>(entities, d, id, out sysEventID);
+                        ProcessDataToEntitiesGeneric<EntFieldDetailPick>(d, id, out sysEventID);
                     }
                     break;
                 #endregion
                 #region 12) FieldDetailPickCategory
                 case "FieldDetailPickCategory":
                     {
-                        ProcessDataToEntitiesGeneric<EntFieldDetailPickCategory>(entities, d, id, out sysEventID);
+                        ProcessDataToEntitiesGeneric<EntFieldDetailPickCategory>(d, id, out sysEventID);
                     }
                     break;
                 #endregion
                 #region 13) Location
                 case "Location":
                     {
-                        ProcessDataToEntitiesGeneric<EntLocation>(entities, d, id, out sysEventID);
+                        ProcessDataToEntitiesGeneric<EntLocation>(d, id, out sysEventID);
                     }
                     break;
                 #endregion
                 #region 14) LocationProduct
                 case "LocationProduct":
                     {
-                        ProcessDataToEntitiesGeneric<EntLocationProduct>(entities, d, id, out sysEventID);
+                        ProcessDataToEntitiesGeneric<EntLocationProduct>(d, id, out sysEventID);
                     }
                     break;
                 #endregion
                 #region 15) LocationSchedule
                 case "LocationSchedule":
                     {
-                        ProcessDataToEntitiesGeneric<EntLocationSchedule>(entities, d, id, out sysEventID);
+                        ProcessDataToEntitiesGeneric<EntLocationSchedule>(d, id, out sysEventID);
                     }
                     break;
                 #endregion
                 #region 16) Map
                 case "Map":
                     {
-                        ProcessDataToEntitiesGeneric<EntMap>(entities, d, id, out sysEventID);
+                        ProcessDataToEntitiesGeneric<EntMap>(d, id, out sysEventID);
                     }
                     break;
                 #endregion
                 #region 17) MapBooth
                 case "MapBooth":
                     {
-                        ProcessDataToEntitiesGeneric<EntMapBooth>(entities, d, id, out sysEventID);
+                        ProcessDataToEntitiesGeneric<EntMapBooth>(d, id, out sysEventID);
                     }
                     break;
                 #endregion
                 #region 18) Person
                 case "Person":
                     {
-                        ProcessDataToEntitiesGeneric<EntPerson>(entities, d, id, out sysEventID);
+                        ProcessDataToEntitiesGeneric<EntPerson>(d, id, out sysEventID);
                     }
                     break;
                 #endregion
                 #region 19) PersonCategory
                 case "PersonCategory":
                     {
-                        ProcessDataToEntitiesGeneric<EntPersonCategory>(entities, d, id, out sysEventID);
+                        ProcessDataToEntitiesGeneric<EntPersonCategory>(d, id, out sysEventID);
                     }
                     break;
                 #endregion
                 #region 20) PersonCompany
                 case "PersonCompany":
                     {
-                        ProcessDataToEntitiesGeneric<EntPersonCompany>(entities, d, id, out sysEventID);
+                        ProcessDataToEntitiesGeneric<EntPersonCompany>(d, id, out sysEventID);
                     }
                     break;
                 #endregion
                 #region 21) PersonFieldDetailPick
                 case "PersonFieldDetailPick":
                     {
-                        ProcessDataToEntitiesGeneric<EntPersonFieldDetailPick>(entities, d, id, out sysEventID);
+                        ProcessDataToEntitiesGeneric<EntPersonFieldDetailPick>(d, id, out sysEventID);
                     }
                     break;
                 #endregion
                 #region 22) PersonPurchase
                 case "PersonPurchase":
                     {
-                        ProcessDataToEntitiesGeneric<EntPersonPurchase>(entities, d, id, out sysEventID);
+                        ProcessDataToEntitiesGeneric<EntPersonPurchase>(d, id, out sysEventID);
                     }
                     break;
                 #endregion
                 #region 23) PersonRegistration
                 case "PersonRegistration":
                     {
-                        ProcessDataToEntitiesGeneric<EntPersonRegistration>(entities, d, id, out sysEventID);
+                        ProcessDataToEntitiesGeneric<EntPersonRegistration>(d, id, out sysEventID);
                     }
                     break;
                 #endregion
                 #region 24) PersonReservation
                 case "PersonReservation":
                     {
-                        ProcessDataToEntitiesGeneric<EntPersonReservation>(entities, d, id, out sysEventID);
+                        ProcessDataToEntitiesGeneric<EntPersonReservation>(d, id, out sysEventID);
                     }
 
                     break;
@@ -372,7 +380,7 @@ namespace eventBitTestClient.Controllers
                 #region 25) Product
                 case "Product":
                     {
-                        ProcessDataToEntitiesGeneric<EntProduct>(entities, d, id, out sysEventID);
+                        ProcessDataToEntitiesGeneric<EntProduct>(d, id, out sysEventID);
                     }
 
                     break;
@@ -380,7 +388,7 @@ namespace eventBitTestClient.Controllers
                 #region 26) ProductCategory
                 case "ProductCategory":
                     {
-                        ProcessDataToEntitiesGeneric<EntProductCategory>(entities, d, id, out sysEventID);
+                        ProcessDataToEntitiesGeneric<EntProductCategory>(d, id, out sysEventID);
                     }
 
                     break;
