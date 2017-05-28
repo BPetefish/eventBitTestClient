@@ -352,6 +352,7 @@
     <Compile Include="Data\SnapshotState.cs">
       <DependentUpon>EventBitModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\SQLDataHelper.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

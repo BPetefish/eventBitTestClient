@@ -15,6 +15,7 @@ namespace eventBitTestClient.Controllers
     public class SyncController : ApiController
     {
         private HttpResponseHelper RH = new HttpResponseHelper();
+        private SQLDataHelper SDQ = new SQLDataHelper();
 
         // GET: api/Sync
         public IEnumerable<string> Get()
@@ -135,6 +136,7 @@ namespace eventBitTestClient.Controllers
 
             ResponseDTO rDTO = new ResponseDTO();
             rDTO.Count = ((JArray)d).Count;
+            
 
             //Sync Data Here
             //There has to be a way I can get this to be more generic.
@@ -164,6 +166,7 @@ namespace eventBitTestClient.Controllers
         private class ResponseDTO
         {
             public int Count { get; set; }
+            public string LastSince { get; set; }
         }
 
         private void ProcessDataToEntitiesGeneric<T>(dynamic d, string id, out int sysEventID) where T : class
@@ -400,27 +403,11 @@ namespace eventBitTestClient.Controllers
 
         private void UpdateEntitySyncLog(string entityId, string showCode, int sysEventId)
         {
-            using (SqlConnection con = new SqlConnection("Data Source=98.204.41.162,49172;Initial Catalog=eventBit;Persist Security Info=True;User ID=Petefish;Password=Pete8901"))
-            {
-                var commandStr = "exec InsertUpdateEntityState '{0}', '{1}', {2}";
+            var commandStr = "exec InsertUpdateEntityState '{0}', '{1}', {2}";
 
-                commandStr = string.Format(commandStr, entityId, showCode, sysEventId);
+            commandStr = string.Format(commandStr, entityId, showCode, sysEventId);
 
-                using (SqlCommand command = new SqlCommand(commandStr, con))
-                {
-                    try
-                    {
-                        con.Open();
-                        command.ExecuteNonQuery();
-                        con.Close();
-                    }
-                    catch (Exception e)
-                    {
-
-                    }
-                }
-
-            }
+            SDQ.ExecuteNonQuery(commandStr);
         }
     }
 }

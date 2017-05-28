@@ -19,6 +19,8 @@ namespace eventBitTestClient.Controllers
     {
 
         private HttpResponseHelper RH = new HttpResponseHelper();
+        private SQLDataHelper SDQ = new SQLDataHelper();
+
         // GET: api/Snapshot
         [Route("api/Snapshot/{eventName}")]
         public async Task<HttpResponseMessage> Get(string eventName)
@@ -134,27 +136,16 @@ namespace eventBitTestClient.Controllers
         #region SQL Helpers
         private void CreateUpdateTrackingTables(Table t, string eventName)
         {
-            using (SqlConnection con = new SqlConnection("Data Source=98.204.41.162,49172;Initial Catalog=eventBit;Persist Security Info=True;User ID=Petefish;Password=Pete8901"))
-            {
-                var commandStr = "If exists (select name from sysobjects where name = '{0}') drop table {0} CREATE TABLE {0}{1}";
+            var commandStr = "If exists (select name from sysobjects where name = '{0}') drop table {0} CREATE TABLE {0}{1}";
 
-                commandStr = string.Format(commandStr, eventName + "_" + t.TableName, CreateTableColumns(t.OrderedColumnSchema));
+            commandStr = string.Format(commandStr, eventName + "_" + t.TableName, CreateTableColumns(t.OrderedColumnSchema));
 
-                using (SqlCommand command = new SqlCommand(commandStr, con))
-                {
-                    try
-                    {
-                        con.Open();
-                        command.ExecuteNonQuery();
-                        con.Close();
-                    }
-                    catch (Exception e)
-                    {
+            SDQ.ExecuteNonQuery(commandStr);
+        }
 
-                    }
-                }
-
-            }
+        private void RunInsertStatement(string insert)
+        {
+            SDQ.ExecuteNonQuery(insert);
         }
 
         private string CreateTableColumns(List<string> columns)
@@ -205,30 +196,7 @@ namespace eventBitTestClient.Controllers
             }
 
             return sb.ToString();
-        }
-
-        private void RunInsertStatement(string insert)
-        {
-
-            using (SqlConnection con = new SqlConnection("Data Source=98.204.41.162,49172;Initial Catalog=eventBit;Persist Security Info=True;User ID=Petefish;Password=Pete8901"))
-            {
-
-                using (SqlCommand command = new SqlCommand(insert, con))
-                {
-                    try
-                    {
-                        con.Open();
-                        command.ExecuteNonQuery();
-                        con.Close();
-                    }
-                    catch (Exception e)
-                    {
-
-                    }
-                }
-
-            }
-        }
+        }        
         #endregion
     }
 }
