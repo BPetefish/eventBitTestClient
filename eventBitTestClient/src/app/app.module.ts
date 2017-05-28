@@ -5,15 +5,14 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 
-import { PullComponent } from './app.component';
-import { LoginComponent } from './app.component';
+import { PullComponent } from './Pull/pull.component';
+import { LoginComponent } from './Login/login.component';
 import { ToasterModule } from 'angular2-toaster';
 //Import Router
 import { Routes, RouterModule } from '@angular/router';
 
 
 import { DatePipe } from '@angular/common'
-
 
 
 export const routes: Routes = [

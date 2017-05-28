@@ -521,9 +521,8 @@
     <Content Include="Scripts\app\app.viewmodel.js" />
     <Content Include="Scripts\app\common.js" />
     <Content Include="Scripts\app\home.viewmodel.js" />
-    <Content Include="src\app\Login\Login.html" />
+    <Content Include="src\app\Login\Views\Login.html" />
     <Content Include="src\app\Pull\Views\Pull.html" />
-    <Content Include="src\app\Styles\pull.css" />
     <Content Include="src\foundation.css" />
     <Content Include="src\favicon.ico" />
     <Content Include="src\foundation\foundation.js" />
@@ -532,7 +531,6 @@
     <Content Include="src\images\logo.png" />
     <Content Include="src\images\TopBarBanner.png" />
     <Content Include="src\index.html" />
-    <Content Include="src\app\Styles\login.css" />
     <Content Include="src\systemjs-angular-loader.js" />
     <Content Include="src\systemjs.config.extras.js" />
     <Content Include="src\systemjs.config.js" />
@@ -592,11 +590,12 @@
     <TypeScriptCompile Include="src\app\app.component.spec.ts" />
     <TypeScriptCompile Include="src\app\app.component.ts" />
     <TypeScriptCompile Include="src\app\app.module.ts" />
-    <TypeScriptCompile Include="src\app\Login\LoginSessionData.ts" />
-    <TypeScriptCompile Include="src\app\Login\loginDTO.ts" />
-    <TypeScriptCompile Include="src\app\Pull\User.ts" />
+    <TypeScriptCompile Include="src\app\Login\Classes\LoginSessionData.ts" />
+    <TypeScriptCompile Include="src\app\Login\Classes\loginDTO.ts" />
+    <TypeScriptCompile Include="src\app\Login\login.component.ts" />
+    <TypeScriptCompile Include="src\app\Pull\Classes\User.ts" />
+    <TypeScriptCompile Include="src\app\Pull\pull.component.ts" />
     <TypeScriptCompile Include="src\main.ts" />
-    <TypeScriptCompile Include="src\app\ToastrFactory.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
