@@ -1,4 +1,8 @@
-﻿body {
+﻿@import 'foundation';
+
+@include foundation-everything;
+
+body {
     background-color:dimgray;
 }
 

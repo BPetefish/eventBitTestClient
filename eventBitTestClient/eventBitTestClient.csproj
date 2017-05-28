@@ -372,6 +372,7 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\toastr.css" />
+    <Content Include="css\main.css" />
     <Content Include="Data\EventBitModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>EventBitModel.edmx</DependentUpon>
@@ -387,6 +388,7 @@
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="gulpfile.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
@@ -424,6 +426,81 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="sass\main.scss" />
+    <Content Include="sass\components\_accordion-menu.scss" />
+    <Content Include="sass\components\_accordion.scss" />
+    <Content Include="sass\components\_badge.scss" />
+    <Content Include="sass\components\_breadcrumbs.scss" />
+    <Content Include="sass\components\_button-group.scss" />
+    <Content Include="sass\components\_button.scss" />
+    <Content Include="sass\components\_callout.scss" />
+    <Content Include="sass\components\_card.scss" />
+    <Content Include="sass\components\_close-button.scss" />
+    <Content Include="sass\components\_drilldown.scss" />
+    <Content Include="sass\components\_dropdown-menu.scss" />
+    <Content Include="sass\components\_dropdown.scss" />
+    <Content Include="sass\components\_flex-video.scss" />
+    <Content Include="sass\components\_flex.scss" />
+    <Content Include="sass\components\_float.scss" />
+    <Content Include="sass\components\_label.scss" />
+    <Content Include="sass\components\_media-object.scss" />
+    <Content Include="sass\components\_menu-icon.scss" />
+    <Content Include="sass\components\_menu.scss" />
+    <Content Include="sass\components\_off-canvas.scss" />
+    <Content Include="sass\components\_orbit.scss" />
+    <Content Include="sass\components\_pagination.scss" />
+    <Content Include="sass\components\_progress-bar.scss" />
+    <Content Include="sass\components\_responsive-embed.scss" />
+    <Content Include="sass\components\_reveal.scss" />
+    <Content Include="sass\components\_slider.scss" />
+    <Content Include="sass\components\_sticky.scss" />
+    <Content Include="sass\components\_switch.scss" />
+    <Content Include="sass\components\_table.scss" />
+    <Content Include="sass\components\_tabs.scss" />
+    <Content Include="sass\components\_thumbnail.scss" />
+    <Content Include="sass\components\_title-bar.scss" />
+    <Content Include="sass\components\_tooltip.scss" />
+    <Content Include="sass\components\_top-bar.scss" />
+    <Content Include="sass\components\_visibility.scss" />
+    <Content Include="sass\forms\_checkbox.scss" />
+    <Content Include="sass\forms\_error.scss" />
+    <Content Include="sass\forms\_fieldset.scss" />
+    <Content Include="sass\forms\_forms.scss" />
+    <Content Include="sass\forms\_help-text.scss" />
+    <Content Include="sass\forms\_input-group.scss" />
+    <Content Include="sass\forms\_label.scss" />
+    <Content Include="sass\forms\_meter.scss" />
+    <Content Include="sass\forms\_progress.scss" />
+    <Content Include="sass\forms\_range.scss" />
+    <Content Include="sass\forms\_select.scss" />
+    <Content Include="sass\forms\_text.scss" />
+    <Content Include="sass\foundation.scss" />
+    <Content Include="sass\grid\_classes.scss" />
+    <Content Include="sass\grid\_column.scss" />
+    <Content Include="sass\grid\_flex-grid.scss" />
+    <Content Include="sass\grid\_grid.scss" />
+    <Content Include="sass\grid\_gutter.scss" />
+    <Content Include="sass\grid\_layout.scss" />
+    <Content Include="sass\grid\_position.scss" />
+    <Content Include="sass\grid\_row.scss" />
+    <Content Include="sass\grid\_size.scss" />
+    <Content Include="sass\settings\_settings.scss" />
+    <Content Include="sass\typography\_alignment.scss" />
+    <Content Include="sass\typography\_base.scss" />
+    <Content Include="sass\typography\_helpers.scss" />
+    <Content Include="sass\typography\_print.scss" />
+    <Content Include="sass\typography\_typography.scss" />
+    <Content Include="sass\util\_breakpoint.scss" />
+    <Content Include="sass\util\_color.scss" />
+    <Content Include="sass\util\_direction.scss" />
+    <Content Include="sass\util\_flex.scss" />
+    <Content Include="sass\util\_math.scss" />
+    <Content Include="sass\util\_mixins.scss" />
+    <Content Include="sass\util\_selector.scss" />
+    <Content Include="sass\util\_unit.scss" />
+    <Content Include="sass\util\_util.scss" />
+    <Content Include="sass\util\_value.scss" />
+    <Content Include="sass\_global.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -456,7 +533,6 @@
     <Content Include="src\images\TopBarBanner.png" />
     <Content Include="src\index.html" />
     <Content Include="src\app\Styles\login.css" />
-    <Content Include="src\site.css" />
     <Content Include="src\systemjs-angular-loader.js" />
     <Content Include="src\systemjs.config.extras.js" />
     <Content Include="src\systemjs.config.js" />
@@ -501,6 +577,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="sass\_vendor\normalize-scss\sass\" />
+    <Folder Include="sass\_vendor\sassy-lists\stylesheets\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -563,6 +641,9 @@
     <Error Condition="!Exists('..\packages\Microsoft.TypeScript.MSBuild.2.3.1\build\Microsoft.TypeScript.MSBuild.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.TypeScript.MSBuild.2.3.1\build\Microsoft.TypeScript.MSBuild.targets'))" />
   </Target>
   <Import Project="..\packages\Microsoft.TypeScript.MSBuild.2.3.1\build\Microsoft.TypeScript.MSBuild.targets" Condition="Exists('..\packages\Microsoft.TypeScript.MSBuild.2.3.1\build\Microsoft.TypeScript.MSBuild.targets')" />
+  <PropertyGroup>
+    <PostBuildEvent>gulp sass</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
