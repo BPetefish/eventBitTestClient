@@ -16,5 +16,6 @@ namespace eventBitTestClient.Data
     {
         public string ShowCode { get; set; }
         public string UniqueIdentifier { get; set; }
+        public Nullable<bool> Processing { get; set; }
     }
 }

@@ -608,6 +608,7 @@
           </Key>
           <Property Name="ShowCode" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="UniqueIdentifier" Type="varchar(max)" />
+          <Property Name="Processing" Type="bit" />
         </EntityType>
         <EntityContainer Name="eventBitModelStoreContainer">
           <EntitySet Name="Booth" EntityType="Self.Booth" Schema="dbo" store:Type="Tables" />
@@ -1276,6 +1277,7 @@
           </Key>
           <Property Name="ShowCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="UniqueIdentifier" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Processing" Type="Boolean" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1909,6 +1911,7 @@
           <EntitySetMapping Name="SnapshotStates">
             <EntityTypeMapping TypeName="eventBitModel.SnapshotState">
               <MappingFragment StoreEntitySet="SnapshotState">
+                <ScalarProperty Name="Processing" ColumnName="Processing" />
                 <ScalarProperty Name="UniqueIdentifier" ColumnName="UniqueIdentifier" />
                 <ScalarProperty Name="ShowCode" ColumnName="ShowCode" />
               </MappingFragment>

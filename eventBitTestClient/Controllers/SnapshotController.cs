@@ -78,9 +78,13 @@ namespace eventBitTestClient.Controllers
 
         }
 
-        const string DIR_PATH = @"C:\Users\xFish\Documents\ChunkURITest\";
+        const string DIR_PATH = @"D:\Snapshots\";
         private void ProcessTrackedData(TrackedData d, string eventName)
         {
+            string filePath = DIR_PATH + eventName + "\\";
+
+            System.IO.Directory.CreateDirectory(filePath);
+
             foreach (Table t in d.Tables)
             {
                 //Make Sure My Tables Are Correct
@@ -90,11 +94,11 @@ namespace eventBitTestClient.Controllers
                 for (int i = 0; i < t.ChunkURIs.Count; i++)
                 {
                     WebClient Client = new WebClient();
-                    Client.DownloadFile(t.ChunkURIs[i], DIR_PATH + t.TableName + "_" + i + ".gz");
+                    Client.DownloadFile(t.ChunkURIs[i], filePath + t.TableName + "_" + i + ".gz");
                 }
 
                 //Load Files Into Database
-                DirectoryInfo dir = new DirectoryInfo(DIR_PATH);
+                DirectoryInfo dir = new DirectoryInfo(filePath);
                 var files = dir.GetFiles(t.TableName + "*");
                 foreach (FileInfo file in files)
                 {

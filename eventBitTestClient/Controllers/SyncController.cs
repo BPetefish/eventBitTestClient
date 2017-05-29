@@ -136,7 +136,7 @@ namespace eventBitTestClient.Controllers
 
             ResponseDTO rDTO = new ResponseDTO();
             rDTO.Count = ((JArray)d).Count;
-            
+            rDTO.LastSince = entityState.sysRowStampNumMax.ToString();
 
             //Sync Data Here
             //There has to be a way I can get this to be more generic.

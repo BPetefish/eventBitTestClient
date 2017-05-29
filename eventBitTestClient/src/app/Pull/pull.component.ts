@@ -95,7 +95,7 @@ export class PullComponent {
             var resp = JSON.parse(data.text());
 
             if (resp && resp.Count) {
-                this.logText("Processed " + resp.Count + " rows for entity '" + entityId + "'");
+                this.logText("Processed " + resp.Count + " rows for entity '" + entityId + "' Since: " + resp.LastSince);
 
                 if (resp.Count > 0)
                     this.syncEntityLoop(entityId)
