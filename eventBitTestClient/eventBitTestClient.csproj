@@ -502,6 +502,7 @@
     <Content Include="sass\util\_util.scss" />
     <Content Include="sass\util\_value.scss" />
     <Content Include="sass\_global.scss" />
+    <None Include="Properties\PublishProfiles\eventBitTestClient.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
