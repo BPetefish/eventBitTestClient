@@ -28,7 +28,7 @@
             </div>
         </div>
         <h2>Incremental Entity Feeds</h2>
-        <p>You can use this to sync the </p>
+        <p>Please select the entity you would like to sync from below.  A show code is required in order to sync any entity.  When a request to sync is called, the program will run until the given entity is up to date. </p>
 
         <div [hidden]="!loading"><h3>Loading... <i class="fa fa-spinner fa-spin fa-fw"></i></h3></div>
         <div [hidden]="loading">
@@ -52,13 +52,13 @@
         <div class="row">
             <div class="large-12 columns">
                 <label class="field-label">Sync Log
-                    <textarea class="copyArea" readonly rows="20" [(ngModel)]="taText"></textarea>
+                    <textarea class="js-copytextarea" readonly rows="20" [(ngModel)]="taText"></textarea>
                 </label>
             </div>
         </div>
         <div class="row">
-            <div class="large-12 columns"><button [disabled]="!taText" (click)="clearLog()" class="button secondary expanded round">Clear</button></div>
-            <!--<div class="large-6 columns"><button class="button secondary expanded">Copy</button></div>-->
+            <div class="large-6 columns"><button [disabled]="!taText" (click)="clearLog()" class="button secondary expanded round">Clear</button></div>
+            <div class="large-6 columns"><button [disabled]="!taText" (click)="copyTextArea()" class="button secondary expanded">Copy</button></div>
         </div>
         <h2>Tracked Dump Snapshots</h2>
         <div class="row">
@@ -68,5 +68,3 @@
         </div>
     </div>
 </div>
-
-

@@ -195,4 +195,16 @@ export class PullComponent {
 
         return true;
     }
+
+    copyTextArea() {
+        var copyTextarea = document.querySelector('.js-copytextarea');
+        (<HTMLTextAreaElement>copyTextarea).select();
+
+        try {
+            var successful = document.execCommand('copy');
+            this.toastr.pop('success', 'Text copied to clipboard.');
+        } catch (err) {
+            this.toastr.pop('warning', 'Unable to copy text to clipboard.');
+        }
+    }
 }
