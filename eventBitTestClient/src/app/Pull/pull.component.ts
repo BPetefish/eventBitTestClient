@@ -95,14 +95,15 @@ export class PullComponent {
             var resp = JSON.parse(data.text());
 
             if (resp && resp.Count) {
-                this.logText("Processed " + resp.Count + " rows for entity '" + entityId + "' Since: " + resp.LastSince);
+                this.logText("Request: " + resp.LastSince + " | Processed: " + resp.Count + " rows.");
+                //this.logText("Processed " + resp.Count + " rows for entity '" + entityId + "' Since: " + resp.LastSince);
 
                 if (resp.Count > 0)
                     this.syncEntityLoop(entityId)
 
             } else if (resp && resp.Count == 0) {
                 //this.logText("Processed " + resp.count + " rows for entity '" + entityId + "'");
-                this.logText("Received back zero rows for request. '" + entityId + "' currently up to date.")
+                this.logText("Request: " + resp.LastSince + " | Processed: " + resp.Count + " rows.  Entity is currently up to date.");
 
                 this.toastr.pop('success', entityId + ' received zero entires back with latest since stamp, sync is complete.')
             }

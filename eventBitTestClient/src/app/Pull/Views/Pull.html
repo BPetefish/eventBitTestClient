@@ -1,4 +1,4 @@
-﻿<div class="top-bar">
+﻿<div class="sticky top-bar">
     <div class="top-bar-left">
         <ul class="dropdown menu" data-dropdown-menu>
             <li class="menu-text"><!--eventBit test harness--><img src="images/TopBarBanner.png" /></li>
@@ -9,7 +9,7 @@
     <div class="large-12 columns">
         <div class="row">
             <div class="large-12 columns text-right">
-                Welcome, {{loggedUser.FirstName}}!
+                <strong>Welcome, {{loggedUser.FirstName}}!</strong>
             </div>
         </div>   
         <!--<div class="row">
@@ -28,7 +28,7 @@
             </div>
         </div>
         <h2>Incremental Entity Feeds</h2>
-        <p>Please be aware, some entities make take some time to sync the first time. (i.e. Person)</p>
+        <p>You can use this to sync the </p>
 
         <div [hidden]="!loading"><h3>Loading... <i class="fa fa-spinner fa-spin fa-fw"></i></h3></div>
         <div [hidden]="loading">

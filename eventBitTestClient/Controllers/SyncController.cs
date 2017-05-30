@@ -70,7 +70,7 @@ namespace eventBitTestClient.Controllers
 
             var json = await response.Content.ReadAsStringAsync();
 
-            return new EntityCallResponse() {Content = json, StatusCode = response.StatusCode, X_AUTH_CLAIMS = newXAuthHeader };
+            return new EntityCallResponse() {Content = json, StatusCode = response.StatusCode, X_AUTH_CLAIMS = newXAuthHeader, RequestString = client.BaseAddress.AbsoluteUri + "?include=-&max=1000&since=" + since ?? "" };
         }
 
         public class EntityCallResponse
@@ -78,6 +78,7 @@ namespace eventBitTestClient.Controllers
             public HttpStatusCode StatusCode { get; set; }
             public string Content { get; set; }
             public string X_AUTH_CLAIMS { get; set; }
+            public string RequestString { get; set; }
         }
 
         public static void CopyPropertyValues(object source, object destination)
@@ -136,7 +137,7 @@ namespace eventBitTestClient.Controllers
 
             ResponseDTO rDTO = new ResponseDTO();
             rDTO.Count = ((JArray)d).Count;
-            rDTO.LastSince = entityState.sysRowStampNumMax.ToString();
+            rDTO.LastSince = resp.RequestString;
 
             //Sync Data Here
             //There has to be a way I can get this to be more generic.

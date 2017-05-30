@@ -526,7 +526,6 @@
     <Content Include="Scripts\app\home.viewmodel.js" />
     <Content Include="src\app\Login\Views\Login.html" />
     <Content Include="src\app\Pull\Views\Pull.html" />
-    <Content Include="src\foundation.css" />
     <Content Include="src\favicon.ico" />
     <Content Include="src\foundation\foundation.js" />
     <Content Include="src\foundation\jquery.js" />
