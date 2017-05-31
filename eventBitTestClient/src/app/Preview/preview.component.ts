@@ -17,6 +17,7 @@ export class PreviewComponent {
     tblData: any;
     sysRowStampNumMax: string;
     rowCount: number;
+    loading: boolean = true;
 
     constructor(private route: ActivatedRoute, private http: Http, private router: Router) {    
         this.route.params.subscribe(params => {
@@ -30,9 +31,11 @@ export class PreviewComponent {
             this.tblData = d.data;
             this.sysRowStampNumMax = d.sysRowStampNumMax;
             this.rowCount = d.rowCount;
+            this.loading = false;
 
         }, error => {
             alert('Error');
+            this.loading = false;
         });
     } 
 

@@ -34,6 +34,7 @@ export class LoginComponent {
 
     }
 
+    //Login the user and get the x-auth-token
     login() {
 
         if (!this.model.Username || !this.model.Password) {
@@ -41,6 +42,7 @@ export class LoginComponent {
             return;
         }
 
+        //Remember Me Checkbox Logic
         if (this.remMe) {
 
             var now = new Date();

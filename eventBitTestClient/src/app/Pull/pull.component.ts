@@ -42,6 +42,7 @@ export class PullComponent {
 
     }
 
+    //Get the list of entities for my drop down.
     getEntities() {
         this.http.get('/api/Sync/').subscribe(data => {
 
@@ -67,10 +68,14 @@ export class PullComponent {
         });
     }
 
+    //Starter method for sync
     syncEntities() {
         this.syncEntityLoop(this.entSync);
     }
 
+
+    //Method that calls backt to Web API with x-auth header.
+    //API gets request, processess data and passes info back up
     syncEntityLoop(entityId: string) {
 
         if (!this.showCode) {
@@ -135,6 +140,8 @@ export class PullComponent {
         });
     }
 
+    //This is the method to start the data pull from aws.
+    //This runs until all data is processed. 
     pullSnapShot() {
 
         if (!this.showCode) {
@@ -180,6 +187,7 @@ export class PullComponent {
         });
     }
 
+    //Method to log text to the sync log.
     logText(text: string) {
 
         var d = this.datePipe.transform(new Date(), 'MM/dd/y hh:mm:ss a');
@@ -192,12 +200,14 @@ export class PullComponent {
 
     }
 
+    //
     clearLog() {
 
         this.log = [];
         this.taText = "";
     }
 
+    //A cheap timeout check.
     IsHeaderValid(claim: string) {
         var header = JSON.parse(claim);
 
@@ -210,6 +220,7 @@ export class PullComponent {
         return true;
     }
 
+    //Copy the text in the text area. Hopefully your browser supports this.
     copyTextArea() {
         var copyTextarea = document.querySelector('.js-copytextarea');
         (<HTMLTextAreaElement>copyTextarea).select();
@@ -222,7 +233,14 @@ export class PullComponent {
         }
     }
 
+    //Preview a small snapshot of the data you synced. 
     previewEntity() {
+
+        //I'll still check my cliam here.  Just incase they timeout, so they can't pull information
+        var claim = localStorage.getItem('X-AUTH-CLAIMS');
+        //Check for timeout and such.
+        if (!this.IsHeaderValid(claim))
+            return;
 
         if (!this.showCode) {
             //Test

@@ -9,7 +9,10 @@
     <div class="large-12 columns">
         <h1>{{showCode}} | {{entityId}}</h1>
         <p>Below are a few statics and a small preview of the data that is synced for the selected show and entity.</p>
-        <div>
+
+        <div [hidden]="!loading"><h3>Loading... <i class="fa fa-spinner fa-spin fa-fw"></i></h3></div>
+
+        <div [hidden]="loading">
             <ul class="small-block-grid-2">
                 <li>SysRowStampNumMax: {{sysRowStampNumMax}}</li>
                 <li>Row Count: {{rowCount}}</li>
