@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Http, Response, Headers } from '@angular/http';
 import { DatePipe } from '@angular/common'
 import { ToasterContainerComponent, ToasterService, ToasterConfig } from 'angular2-toaster';
+import { ActivatedRoute } from '@angular/router';
 
 //Classes
 import { User } from './Classes/User'
@@ -38,6 +39,7 @@ export class PullComponent {
         this.loggedUser.Email = loginInfo.Email;
 
         this.loading = true;
+
     }
 
     getEntities() {
@@ -46,6 +48,19 @@ export class PullComponent {
             this.ent = JSON.parse(data.text());
             this.entSync = "";
             this.loading = false;
+
+            //I'm going to set my search criteria so I can reassign it on a back.
+            let sc:any = JSON.parse(localStorage.getItem("SEARCHC"));
+            if (sc)
+            {
+                if (sc.showCode)
+                    this.showCode = sc.showCode;
+
+                if (sc.entityId)
+                    this.entSync = sc.entityId;
+
+                localStorage.setItem("SEARCHC", null);
+            }
 
         }, error => {
             alert('Error');
@@ -96,13 +111,12 @@ export class PullComponent {
 
             if (resp && resp.Count) {
                 this.logText("Request: " + resp.LastSince + " | Processed: " + resp.Count + " rows.");
-                //this.logText("Processed " + resp.Count + " rows for entity '" + entityId + "' Since: " + resp.LastSince);
 
                 if (resp.Count > 0)
                     this.syncEntityLoop(entityId)
 
             } else if (resp && resp.Count == 0) {
-                //this.logText("Processed " + resp.count + " rows for entity '" + entityId + "'");
+
                 this.logText("Request: " + resp.LastSince + " | Processed: " + resp.Count + " rows.  Entity is currently up to date.");
 
                 this.toastr.pop('success', entityId + ' received zero entires back with latest since stamp, sync is complete.')
@@ -206,5 +220,28 @@ export class PullComponent {
         } catch (err) {
             this.toastr.pop('warning', 'Unable to copy text to clipboard.');
         }
+    }
+
+    previewEntity() {
+
+        if (!this.showCode) {
+            //Test
+            this.toastr.pop('error', 'You must provide a show code.');
+            return;
+        }
+
+        if (!this.entSync) {
+            this.toastr.pop('error', 'You select an entity to preview.');
+            return;
+        }
+
+        var searchC:any = {};
+        searchC.showCode = this.showCode;
+        searchC.entityId = this.entSync;
+
+        //I'm going to set my search criteria so I can reassign it on a back.
+        localStorage.setItem("SEARCHC", JSON.stringify(searchC));
+
+        this.router.navigateByUrl('/preview/' + this.showCode + '/' + this.entSync);
     }
 }

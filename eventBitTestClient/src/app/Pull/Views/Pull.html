@@ -44,7 +44,10 @@
                 </div>
             </div>
             <div class="row">
-                <div class="large-12 columns">
+                <div class="large-6 columns">
+                    <button [disabled]="saving" (click)="previewEntity()" type="button" class="button expanded">Preview Entity</button>
+                </div>
+                <div class="large-6 columns">
                     <button [disabled]="saving" (click)="syncEntities()" type="button" class="button expanded">Sync Entity <span [hidden]="!saving"><i class="fa fa-spinner fa-spin fa-fw"></i></span></button>
                 </div>
             </div>

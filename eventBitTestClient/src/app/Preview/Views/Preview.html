@@ -1,0 +1,44 @@
+﻿<div class="sticky top-bar">
+    <div class="top-bar-left">
+        <ul class="dropdown menu" data-dropdown-menu>
+            <li class="menu-text"><!--eventBit test harness--><img src="images/TopBarBanner.png" /></li>
+        </ul>
+    </div>
+</div>
+<div class="row pull-rounded" style="background-color:#ffffff;">
+    <div class="large-12 columns">
+        <h1>{{showCode}} | {{entityId}}</h1>
+        <p>Below are a few statics and a small preview of the data that is synced for the selected show and entity.</p>
+        <div>
+            <ul class="small-block-grid-2">
+                <li>SysRowStampNumMax: {{sysRowStampNumMax}}</li>
+                <li>Row Count: {{rowCount}}</li>
+            </ul>
+            <div class="row">
+                <div class="large-12">
+                    <div class="table-scroll" style="height:500px;overflow:auto">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th *ngFor="let c of columns">{{c}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let d of tblData">
+                                    <td *ngFor="let c of columns" style="vertical-align:top;">{{d[c]}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br /><br />
+        <div class="row">
+            <div class="large-12 text-center">
+                <button (click)="back()" class="button">Back</button>
+            </div>
+        </div>
+
+    </div>
+</div>

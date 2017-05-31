@@ -121,46 +121,44 @@ namespace eventBitTestClient.Controllers
                     entityState.EntityID = id;
                     entityState.ShowCode = eventName;
                 }
-            }
 
-            EntityCallResponse resp = await GetEntityResponse(id, eventName, entityState.sysRowStampNumMax);
+                EntityCallResponse resp = await GetEntityResponse(id, eventName, entityState.sysRowStampNumMax);
 
-            
-
-            //Error Check This Out.
-            if (resp == null || resp.StatusCode != HttpStatusCode.OK)
-            {
-                return RH.BadRequest(resp.X_AUTH_CLAIMS, resp.Content);
-            }
-
-            var d = JsonConvert.DeserializeObject(resp.Content);
-
-            ResponseDTO rDTO = new ResponseDTO();
-            rDTO.Count = ((JArray)d).Count;
-            rDTO.LastSince = resp.RequestString;
-
-            //Sync Data Here
-            //There has to be a way I can get this to be more generic.
-            if (rDTO.Count > 0)
-            {
-                try
+                //Error Check This Out.
+                if (resp == null || resp.StatusCode != HttpStatusCode.OK)
                 {
-                    //There has to be a way to make this SUPER generic. 
-                    //Currently a messy switch. At least it makes it easy to debug.
-                    //ProcessDataToEntities(entities, entityState, d, id);
-                    int sysEventId = 0;
-
-                    GenericSwitchToAssignTypes(d, id, out sysEventId);
-
-                    UpdateEntitySyncLog(id, eventName, sysEventId);
+                    return RH.BadRequest(resp.X_AUTH_CLAIMS, resp.Content);
                 }
-                catch (Exception e)
+
+                var d = JsonConvert.DeserializeObject(resp.Content);
+
+                ResponseDTO rDTO = new ResponseDTO();
+                rDTO.Count = ((JArray)d).Count;
+                rDTO.LastSince = resp.RequestString;
+
+                //Sync Data Here
+                //There has to be a way I can get this to be more generic.
+                if (rDTO.Count > 0)
                 {
-                    return RH.BadRequest(resp.X_AUTH_CLAIMS, e.InnerException.ToString());
-                }
-            }
+                    try
+                    {
+                        //There has to be a way to make this SUPER generic. 
+                        //Currently a messy switch. At least it makes it easy to debug.
+                        //ProcessDataToEntities(entities, entityState, d, id);
+                        int sysEventId = 0;
 
-            return RH.OK(resp.X_AUTH_CLAIMS, JsonConvert.SerializeObject(rDTO));
+                        GenericSwitchToAssignTypes(d, id, out sysEventId);
+
+                        UpdateEntitySyncLog(id, eventName, sysEventId);
+                    }
+                    catch (Exception e)
+                    {
+                        return RH.BadRequest(resp.X_AUTH_CLAIMS, e.InnerException.ToString());
+                    }
+                }
+
+                return RH.OK(resp.X_AUTH_CLAIMS, JsonConvert.SerializeObject(rDTO));
+            }
 
         }
 

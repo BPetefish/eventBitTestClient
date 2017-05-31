@@ -160,6 +160,7 @@
           <Property Name="EntityID" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ShowCode" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="sysRowStampNumMax" Type="float" />
+          <Property Name="sysEventId" Type="float" />
         </EntityType>
         <EntityType Name="Facility">
           <Key>
@@ -682,6 +683,7 @@
           <Property Name="EntityID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ShowCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="sysRowStampNumMax" Type="Double" />
+          <Property Name="sysEventId" Type="Double" />
         </EntityType>
         <EntityType Name="EntBooth">
           <Key>
@@ -1288,6 +1290,7 @@
           <EntitySetMapping Name="EntityStates">
             <EntityTypeMapping TypeName="eventBitModel.EntityState">
               <MappingFragment StoreEntitySet="EntityState">
+                <ScalarProperty Name="sysEventId" ColumnName="sysEventId" />
                 <ScalarProperty Name="sysRowStampNumMax" ColumnName="sysRowStampNumMax" />
                 <ScalarProperty Name="ShowCode" ColumnName="ShowCode" />
                 <ScalarProperty Name="EntityID" ColumnName="EntityID" />

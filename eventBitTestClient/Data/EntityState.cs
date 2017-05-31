@@ -17,5 +17,6 @@ namespace eventBitTestClient.Data
         public string EntityID { get; set; }
         public string ShowCode { get; set; }
         public Nullable<double> sysRowStampNumMax { get; set; }
+        public Nullable<double> sysEventId { get; set; }
     }
 }

@@ -250,6 +250,7 @@
     <Compile Include="Controllers\HttpResponseHelper.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MeController.cs" />
+    <Compile Include="Controllers\PreviewController.cs" />
     <Compile Include="Controllers\PullController.cs" />
     <Compile Include="Controllers\SnapshotController.cs" />
     <Compile Include="Controllers\SyncController.cs" />
@@ -525,6 +526,7 @@
     <Content Include="Scripts\app\common.js" />
     <Content Include="Scripts\app\home.viewmodel.js" />
     <Content Include="src\app\Login\Views\Login.html" />
+    <Content Include="src\app\Preview\Views\Preview.html" />
     <Content Include="src\app\Pull\Views\Pull.html" />
     <Content Include="src\favicon.ico" />
     <Content Include="src\foundation\foundation.js" />
@@ -595,6 +597,7 @@
     <TypeScriptCompile Include="src\app\Login\Classes\LoginSessionData.ts" />
     <TypeScriptCompile Include="src\app\Login\Classes\loginDTO.ts" />
     <TypeScriptCompile Include="src\app\Login\login.component.ts" />
+    <TypeScriptCompile Include="src\app\Preview\preview.component.ts" />
     <TypeScriptCompile Include="src\app\Pull\Classes\User.ts" />
     <TypeScriptCompile Include="src\app\Pull\pull.component.ts" />
     <TypeScriptCompile Include="src\main.ts" />

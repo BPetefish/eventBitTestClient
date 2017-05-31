@@ -5,7 +5,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="913f6bbc40434987b26d0bbbd75cae7b" Name="Diagram1" ZoomLevel="86">
-        <EntityTypeShape EntityType="eventBitModel.EntityState" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="eventBitModel.EntityState" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="eventBitModel.EntBooth" Width="1.5" PointX="11.625" PointY="0.625" IsExpanded="false" />
         <EntityTypeShape EntityType="eventBitModel.EntCategory" Width="1.5" PointX="11.625" PointY="1.625" IsExpanded="false" />
         <EntityTypeShape EntityType="eventBitModel.EntCompany" Width="1.5" PointX="11.625" PointY="2.125" IsExpanded="false" />
