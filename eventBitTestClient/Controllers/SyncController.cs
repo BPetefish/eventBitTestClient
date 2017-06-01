@@ -153,7 +153,7 @@ namespace eventBitTestClient.Controllers
                     }
                     catch (Exception e)
                     {
-                        return RH.BadRequest(resp.X_AUTH_CLAIMS, e.InnerException.ToString());
+                        return RH.BadRequest(resp.X_AUTH_CLAIMS, e.Message.ToString());
                     }
                 }
 

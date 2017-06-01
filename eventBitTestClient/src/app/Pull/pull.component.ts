@@ -85,7 +85,7 @@ export class PullComponent {
         }
 
         if (!entityId) {
-            this.toastr.pop('error', 'You select an entity to sync.');
+            this.toastr.pop('error', 'You must select an entity to sync.');
             return;
         }
 
@@ -249,7 +249,7 @@ export class PullComponent {
         }
 
         if (!this.entSync) {
-            this.toastr.pop('error', 'You select an entity to preview.');
+            this.toastr.pop('error', 'You must select an entity to preview.');
             return;
         }
 
