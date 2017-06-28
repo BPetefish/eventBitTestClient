@@ -102,6 +102,24 @@ namespace eventBitTestClient.Controllers
         }
         #endregion
 
+        [Route("api/Sync/Events")]
+        public async Task<HttpResponseMessage> GetEvents()
+        {
+            string authHeader = Request.Headers.GetValues("X-AUTH-CLAIMS").First();
+
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("https://dev.experienteventbit.com/webapi/API/Event/");
+
+            client.DefaultRequestHeaders.Add("X-AUTH-CLAIMS", authHeader);
+
+            HttpResponseMessage response = client.GetAsync("").Result;
+
+            string newXAuthHeader = response.Headers.GetValues("X-AUTH-CLAIMS").First();
+
+            var json = await response.Content.ReadAsStringAsync();
+            return RH.OK(newXAuthHeader, json);
+
+        }
 
         // GET: api/Sync/5
         [Route("api/Sync/{id}/{eventName}")]
@@ -394,7 +412,7 @@ namespace eventBitTestClient.Controllers
                     }
 
                     break;
-                    #endregion
+                #endregion
 
             }
         }

@@ -16,7 +16,16 @@
             <div class="large-12 columns">
                 <h1>eventBit test harness</h1>
             </div>
-        </div>-->     
+        </div>-->  
+        <div class="row">
+            <div class="large-6 columns">
+                <button (click)="pullEvents()" type="button" class="button expanded">Pull Events</button>
+            </div>
+            <div class="large-6 columns">
+                <button (click)="pullEntityStructure()" type="button" class="button expanded">Pull Entity Structure</button>
+            </div>
+        </div>   
+        <h2>Incremental Entity Feeds</h2>
         <div class="row">
             <div class="large-12 columns">
                 A show code is required for all actions.
@@ -27,7 +36,7 @@
                 <label class="field-label">Show Code<input [(ngModel)]="showCode" type="text" placeholder="INF999" /></label>
             </div>
         </div>
-        <h2>Incremental Entity Feeds</h2>
+        
         <p>Please select the entity you would like to sync from below.  A show code is required in order to sync any entity.  When a request to sync is called, the program will run until the given entity is up to date. </p>
 
         <div [hidden]="!loading"><h3>Loading... <i class="fa fa-spinner fa-spin fa-fw"></i></h3></div>

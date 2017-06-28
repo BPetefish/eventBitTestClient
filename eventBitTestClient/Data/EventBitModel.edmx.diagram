@@ -5,34 +5,34 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="913f6bbc40434987b26d0bbbd75cae7b" Name="Diagram1" ZoomLevel="86">
-        <EntityTypeShape EntityType="eventBitModel.EntityState" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="eventBitModel.EntBooth" Width="1.5" PointX="11.625" PointY="0.625" IsExpanded="false" />
-        <EntityTypeShape EntityType="eventBitModel.EntCategory" Width="1.5" PointX="11.625" PointY="1.625" IsExpanded="false" />
-        <EntityTypeShape EntityType="eventBitModel.EntCompany" Width="1.5" PointX="11.625" PointY="2.125" IsExpanded="false" />
-        <EntityTypeShape EntityType="eventBitModel.EntCompanyAltName" Width="1.5" PointX="11.625" PointY="2.625" IsExpanded="false" />
-        <EntityTypeShape EntityType="eventBitModel.EntCompanyBooth" Width="1.5" PointX="11.625" PointY="3.125" IsExpanded="false" />
-        <EntityTypeShape EntityType="eventBitModel.EntCompanyCategory" Width="1.5" PointX="11.625" PointY="3.625" IsExpanded="false" />
-        <EntityTypeShape EntityType="eventBitModel.EntFacility" Width="1.5" PointX="11.625" PointY="4.125" IsExpanded="false" />
-        <EntityTypeShape EntityType="eventBitModel.EntFieldDetail" Width="1.5" PointX="11.625" PointY="4.625" IsExpanded="false" />
-        <EntityTypeShape EntityType="eventBitModel.EntFieldDetailPick" Width="1.875" PointX="11.625" PointY="5.625" IsExpanded="false" />
-        <EntityTypeShape EntityType="eventBitModel.EntLocation" Width="1.5" PointX="11.625" PointY="6.625" IsExpanded="false" />
-        <EntityTypeShape EntityType="eventBitModel.EntLocationProduct" Width="1.5" PointX="11.625" PointY="7.125" IsExpanded="false" />
-        <EntityTypeShape EntityType="eventBitModel.EntLocationSchedule" Width="1.5" PointX="11.625" PointY="7.625" IsExpanded="false" />
-        <EntityTypeShape EntityType="eventBitModel.EntMap" Width="1.5" PointX="14.125" PointY="0.625" IsExpanded="false" />
-        <EntityTypeShape EntityType="eventBitModel.EntMapBooth" Width="1.5" PointX="14.125" PointY="1.125" IsExpanded="false" />
-        <EntityTypeShape EntityType="eventBitModel.EntPerson" Width="1.5" PointX="14.125" PointY="1.625" IsExpanded="false" />
-        <EntityTypeShape EntityType="eventBitModel.EntPersonCategory" Width="1.75" PointX="14.125" PointY="2.125" IsExpanded="false" />
-        <EntityTypeShape EntityType="eventBitModel.EntPersonCompany" Width="1.75" PointX="14.125" PointY="2.625" IsExpanded="false" />
-        <EntityTypeShape EntityType="eventBitModel.EntPersonFieldDetailPick" Width="1.875" PointX="14.125" PointY="3.125" IsExpanded="false" />
-        <EntityTypeShape EntityType="eventBitModel.EntPersonPurchase" Width="1.75" PointX="14.125" PointY="3.625" IsExpanded="false" />
-        <EntityTypeShape EntityType="eventBitModel.EntPersonRegistration" Width="2.125" PointX="14.125" PointY="4.125" IsExpanded="false" />
-        <EntityTypeShape EntityType="eventBitModel.EntPersonReservation" Width="2.125" PointX="14.125" PointY="4.625" IsExpanded="false" />
-        <EntityTypeShape EntityType="eventBitModel.EntProduct" Width="1.5" PointX="14.125" PointY="5.125" IsExpanded="false" />
-        <EntityTypeShape EntityType="eventBitModel.EntProductCategory" Width="1.75" PointX="14.125" PointY="5.625" IsExpanded="false" />
-        <EntityTypeShape EntityType="eventBitModel.EntBoothCategory" Width="1.75" PointX="11.625" PointY="1.125" IsExpanded="false" />
-        <EntityTypeShape EntityType="eventBitModel.EntFieldDetailCategory" Width="1.875" PointX="11.625" PointY="5.125" IsExpanded="false" />
-        <EntityTypeShape EntityType="eventBitModel.EntFieldDetailPickCategory" Width="1.875" PointX="11.625" PointY="6.125" IsExpanded="false" />
-        <EntityTypeShape EntityType="eventBitModel.SnapshotState" Width="1.5" PointX="0.75" PointY="2.75" />
+        <EntityTypeShape EntityType="eventBitModel.EntityState" Width="1.5" PointX="2.75" PointY="0.5" IsExpanded="false" />
+        <EntityTypeShape EntityType="eventBitModel.EntBooth" Width="1.5" PointX="0.5" PointY="1.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="eventBitModel.EntCategory" Width="1.5" PointX="0.5" PointY="2.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="eventBitModel.EntCompany" Width="1.5" PointX="0.5" PointY="3.125" IsExpanded="false" />
+        <EntityTypeShape EntityType="eventBitModel.EntCompanyAltName" Width="1.5" PointX="0.5" PointY="3.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="eventBitModel.EntCompanyBooth" Width="1.5" PointX="0.5" PointY="4.125" IsExpanded="false" />
+        <EntityTypeShape EntityType="eventBitModel.EntCompanyCategory" Width="1.5" PointX="0.5" PointY="4.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="eventBitModel.EntFacility" Width="1.5" PointX="0.5" PointY="5.125" IsExpanded="false" />
+        <EntityTypeShape EntityType="eventBitModel.EntFieldDetail" Width="1.5" PointX="0.5" PointY="5.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="eventBitModel.EntFieldDetailPick" Width="1.875" PointX="0.5" PointY="6.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="eventBitModel.EntLocation" Width="1.5" PointX="0.5" PointY="7.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="eventBitModel.EntLocationProduct" Width="1.5" PointX="0.5" PointY="8.125" IsExpanded="false" />
+        <EntityTypeShape EntityType="eventBitModel.EntLocationSchedule" Width="1.5" PointX="0.5" PointY="8.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="eventBitModel.EntMap" Width="1.5" PointX="3" PointY="1.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="eventBitModel.EntMapBooth" Width="1.5" PointX="3" PointY="2.125" IsExpanded="false" />
+        <EntityTypeShape EntityType="eventBitModel.EntPerson" Width="1.5" PointX="3" PointY="2.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="eventBitModel.EntPersonCategory" Width="1.75" PointX="3" PointY="3.125" IsExpanded="false" />
+        <EntityTypeShape EntityType="eventBitModel.EntPersonCompany" Width="1.75" PointX="3" PointY="3.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="eventBitModel.EntPersonFieldDetailPick" Width="1.875" PointX="3" PointY="4.125" IsExpanded="false" />
+        <EntityTypeShape EntityType="eventBitModel.EntPersonPurchase" Width="1.75" PointX="3" PointY="4.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="eventBitModel.EntPersonRegistration" Width="2.125" PointX="3" PointY="5.125" IsExpanded="false" />
+        <EntityTypeShape EntityType="eventBitModel.EntPersonReservation" Width="2.125" PointX="3" PointY="5.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="eventBitModel.EntProduct" Width="1.5" PointX="3" PointY="6.125" IsExpanded="false" />
+        <EntityTypeShape EntityType="eventBitModel.EntProductCategory" Width="1.75" PointX="3" PointY="6.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="eventBitModel.EntBoothCategory" Width="1.75" PointX="0.5" PointY="2.125" IsExpanded="false" />
+        <EntityTypeShape EntityType="eventBitModel.EntFieldDetailCategory" Width="1.875" PointX="0.5" PointY="6.125" IsExpanded="false" />
+        <EntityTypeShape EntityType="eventBitModel.EntFieldDetailPickCategory" Width="1.875" PointX="0.5" PointY="7.125" IsExpanded="false" />
+        <EntityTypeShape EntityType="eventBitModel.SnapshotState" Width="1.5" PointX="0.875" PointY="0.5" IsExpanded="false" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

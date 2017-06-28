@@ -74,6 +74,44 @@ export class PullComponent {
     }
 
 
+    pullEvents() {
+
+        var claim = localStorage.getItem('X-AUTH-CLAIMS');
+
+        if (!this.IsHeaderValid(claim))
+            return;
+
+        var headers = new Headers();
+        headers.append('X-AUTH-CLAIMS', claim);
+
+        this.http.get('/api/Sync/Events', {
+            headers: headers
+        }).subscribe(data => {
+            //debugger;
+            var claim = data.headers.get('X-AUTH-CLAIMS');
+
+            localStorage.setItem('X-AUTH-CLAIMS', claim);
+
+            this.clearLog();
+            this.logText(data.text());
+
+        }, error => {
+
+        });
+    }
+
+    pullEntityStructure() {     
+
+        this.http.get('https://dev.experienteventbit.com/webapi/API/EntityTypeList').subscribe(data => {
+            
+            this.logText(data.text());
+
+        }, error => {
+
+        });
+    }
+
+
     //Method that calls backt to Web API with x-auth header.
     //API gets request, processess data and passes info back up
     syncEntityLoop(entityId: string) {
